@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Typecheck + Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check
+        run: npm run typecheck
+
+      - name: Build (Next.js)
+        run: npm run build
+        env:
+          # Durante o CI, usamos valores dummy só para o build compilar.
+          # Produção lê de vars configuradas no painel da Vercel.
+          NEXT_PUBLIC_SITE_URL: "https://julianamaianutriaplv.com"
+          NEXT_PUBLIC_WHATSAPP_NUMBER: "5531998309435"
+          NEXT_PUBLIC_WHATSAPP_SUPPORT: "5531999191083"
+          LEAD_PROVIDER: "none"
