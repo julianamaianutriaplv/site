@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #4a3b7c;
+    --color-secondary: #c06c86;
+    --color-accent: #c8d4c1;
+    --color-bg: #f6f3ee;
+    --color-fg: #23232b;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif text-foreground;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: #4a3b7c;
+    color: #f6f3ee;
+  }
+
+  /* Focus ring acessível (WCAG AA) */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  .container-prose {
+    @apply mx-auto max-w-[68ch] px-5 md:px-0;
+  }
+
+  .prose-custom {
+    @apply text-foreground/90 leading-relaxed;
+  }
+
+  .prose-custom h2 {
+    @apply font-serif text-3xl mt-12 mb-4 text-primary;
+  }
+
+  .prose-custom h3 {
+    @apply font-serif text-2xl mt-8 mb-3 text-foreground;
+  }
+
+  .prose-custom p {
+    @apply my-4 text-lg;
+  }
+
+  .prose-custom a {
+    @apply text-primary underline decoration-secondary/40 underline-offset-4 hover:decoration-secondary;
+  }
+
+  .prose-custom ul {
+    @apply my-4 pl-6 list-disc space-y-2;
+  }
+
+  .prose-custom ol {
+    @apply my-4 pl-6 list-decimal space-y-2;
+  }
+
+  .prose-custom blockquote {
+    @apply border-l-4 border-secondary pl-6 my-6 italic text-foreground/75;
+  }
+
+  .prose-custom strong {
+    @apply font-semibold text-foreground;
+  }
+
+  .prose-custom code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose-custom hr {
+    @apply my-12 border-border;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
