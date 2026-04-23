@@ -65,7 +65,7 @@ Ainda na tela de criação do projeto, antes de deployar, vá em **Environment V
 | Name | Value |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | `https://julianamaianutriaplv.com` |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | `5531998309435` |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | `5531999191083` |
 | `NEXT_PUBLIC_WHATSAPP_SUPPORT` | `5531999191083` |
 
 ### Variáveis opcionais (pode adicionar agora em branco, ativar depois)

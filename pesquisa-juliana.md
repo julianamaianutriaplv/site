@@ -23,8 +23,7 @@
 | Facebook | @julianamaianutriaplv | página ativa |
 | TikTok | @julianamaianutriaplv | página ativa |
 | Site atual | julianamaianutriaplv.com.br | Elementor/WordPress |
-| WhatsApp (pessoal/profissional) | 55 31 99830-9435 | declarado no site |
-| WhatsApp (suporte/equipe) | 55 31 99919-1083 | declarado no site |
+| WhatsApp (equipe — canal único) | 55 31 99919-1083 | declarado no site |
 
 ---
 

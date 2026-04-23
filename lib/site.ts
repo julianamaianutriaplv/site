@@ -25,7 +25,8 @@ export const siteConfig = {
   },
 
   contact: {
-    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5531998309435",
+    // Atendimento 100% pela equipe de suporte
+    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5531999191083",
     whatsappSupport:
       process.env.NEXT_PUBLIC_WHATSAPP_SUPPORT ?? "5531999191083",
     // Domínio .com (novo); Google Workspace entrega o e-mail

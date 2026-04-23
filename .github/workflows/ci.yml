@@ -38,6 +38,6 @@ jobs:
           # Durante o CI, usamos valores dummy só para o build compilar.
           # Produção lê de vars configuradas no painel da Vercel.
           NEXT_PUBLIC_SITE_URL: "https://julianamaianutriaplv.com"
-          NEXT_PUBLIC_WHATSAPP_NUMBER: "5531998309435"
+          NEXT_PUBLIC_WHATSAPP_NUMBER: "5531999191083"
           NEXT_PUBLIC_WHATSAPP_SUPPORT: "5531999191083"
           LEAD_PROVIDER: "none"
