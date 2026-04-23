@@ -16,7 +16,7 @@ import { siteConfig, whatsappLink } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Consultas — Acompanhamento nutricional APLV",
   description:
-    "Consultas 100% online por Zoom com Juliana Maia. Pacotes Completo e Básico, com prescrição nutricional, suplementação e lista de marcas seguras.",
+    "Consultas 100% online por Google Meet com Juliana Maia. Pacotes Completo e Básico, com prescrição nutricional, suplementação e lista de marcas seguras.",
   path: "/consultas",
 });
 
@@ -27,7 +27,7 @@ const packages = [
     description:
       "Acompanhamento mais próximo, indicado para famílias em início de diagnóstico ou casos complexos.",
     items: [
-      "1 consulta inicial (videochamada Zoom)",
+      "1 consulta inicial (videochamada Google Meet)",
       "2 consultas de retorno (a cada 20 dias)",
       "Acompanhamento por WhatsApp por 2 meses em dias úteis",
       "Prescrição nutricional individualizada",
@@ -42,7 +42,7 @@ const packages = [
     description:
       "Indicado para famílias com plano já em andamento que precisam de ajustes pontuais.",
     items: [
-      "1 consulta inicial (videochamada Zoom)",
+      "1 consulta inicial (videochamada Google Meet)",
       "1 consulta de retorno após 20 dias",
       "Prescrição nutricional individualizada",
       "Indicação de suplementação quando aplicável",
@@ -59,7 +59,7 @@ export default function ConsultasPage() {
       <Section
         eyebrow="Consultas"
         title="Acompanhamento nutricional APLV 100% online"
-        description="Atendimento por videochamada (Zoom), em pacotes estruturados. O plano é individual, baseado em avaliação clínica criteriosa."
+        description="Atendimento por videochamada (Google Meet), em pacotes estruturados. O plano é individual, baseado em avaliação clínica criteriosa."
       />
 
       <section className="container pb-16">
@@ -155,7 +155,7 @@ export default function ConsultasPage() {
             step="3"
             icon={<Video className="h-6 w-6" />}
             title="Consulta online"
-            description="Videochamada pelo Zoom. Avaliação clínica detalhada, montagem do plano nutricional, tira-dúvidas."
+            description="Videochamada pelo Google Meet. Avaliação clínica detalhada, montagem do plano nutricional, tira-dúvidas."
           />
           <StepCard
             step="4"
@@ -179,7 +179,7 @@ export default function ConsultasPage() {
           <div className="space-y-6">
             <QaBlock
               q="Atende presencialmente?"
-              a="Não. Atendimento é 100% online via Zoom, o que permite receber famílias de todo o Brasil e do exterior, em horários flexíveis."
+              a="Não. Atendimento é 100% online via Google Meet, o que permite receber famílias de todo o Brasil e do exterior, em horários flexíveis."
             />
             <QaBlock
               q="Preciso ter diagnóstico antes de marcar?"

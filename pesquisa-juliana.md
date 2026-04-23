@@ -61,7 +61,7 @@ Dupla credencial — profissional clínica + mãe que viveu APLV. Isso é o core
 | Item | Status | Observação |
 |---|---|---|
 | Nutricionista clínica | ✅ declarado | CRN-9 22006 verificável |
-| "Mais de uma década como profissional" | ✅ declarado no site | sem ano exato |
+| 20 anos de nutrição clínica + 10 anos especialista em alergia alimentar | ✅ confirmado pela Juliana | atualizado em 2026-04-23 |
 | Pós-graduação em nutrição clínica | ✅ declarado | instituição não declarada publicamente |
 | Especialista em alergia alimentar / APLV | ✅ declarado | sem menção a título formal (ex: especialista pela ASBRAN) |
 
@@ -92,7 +92,7 @@ Extrai um artigo longo do blog atual (~6.600 palavras sobre IgE mediada vs. não
 
 ## 6. OFERTA ATUAL (replicável no novo site)
 
-**Modalidade:** 100% online via Zoom.
+**Modalidade:** 100% online via videochamada (Google Meet).
 
 **Pacote Completo**
 - 1 consulta inicial + 2 retornos (a cada 20 dias)

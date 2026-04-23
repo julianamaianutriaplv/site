@@ -258,7 +258,7 @@ Revisão formal de acessibilidade recomendada antes do deploy público.
 
 ### Sobre credenciais e promessas
 
-- Apenas credenciais **já públicas** no site atual da Juliana são usadas (CRN-9 22006, CNPJ, "mais de 10 anos", pós em nutrição clínica). Nenhuma instituição ou título foi inventado.
+- Apenas credenciais **já públicas** / confirmadas com a Juliana são usadas (CRN-9 22006, CNPJ, 20 anos de nutrição clínica, 10 anos de especialização em alergia alimentar, pós em nutrição clínica). Nenhuma instituição ou título foi inventado.
 - O disclaimer educativo aparece em todos os artigos e na rodapé, em conformidade com o Código de Ética do Nutricionista.
 - Não há promessa de cura — o site segue o CFN.
 

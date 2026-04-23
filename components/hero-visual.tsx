@@ -53,7 +53,7 @@ export function HeroVisual({
       {/* Badge de credibilidade — fica bonito com qualquer foto */}
       <div className="absolute -bottom-4 -right-4 md:-right-6 rounded-2xl bg-card border border-border shadow-soft px-5 py-4">
         <div className="text-xs uppercase tracking-wider text-secondary font-medium mb-1">
-          +10 anos
+          20 anos
         </div>
         <div className="font-serif text-sm text-primary leading-tight">
           de nutrição clínica dedicada

@@ -37,7 +37,7 @@ export default function SobrePage() {
             </div>
             <p>
               Juliana Fernandes Maia é nutricionista clínica ({siteConfig.professional.crn})
-              com mais de uma década de experiência clínica e especialização
+              com 20 anos de experiência clínica e 10 anos de especialização
               em alergia alimentar — com foco em APLV (alergia à proteína do
               leite de vaca) na infância.
             </p>
@@ -85,7 +85,7 @@ export default function SobrePage() {
               />
               <Cred
                 label="Especialização"
-                value={siteConfig.professional.specialty}
+                value={`${siteConfig.professional.specialty} (${siteConfig.professional.specialtyYears} anos)`}
               />
               <Cred
                 label="Pós-graduação"

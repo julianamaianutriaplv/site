@@ -38,8 +38,8 @@ export default function HomePage() {
 
               <p className="mt-6 text-xl text-foreground/80 text-pretty max-w-2xl">
                 Referência em alergia à proteína do leite de vaca (APLV)
-                infantil. Acompanho famílias a estabilizar sintomas com
-                saúde, boa nutrição e leveza na maternidade.
+                infantil. Acompanho famílias a estabilizar (parar) sintomas
+                com saúde, boa nutrição e leveza na maternidade.
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -60,16 +60,16 @@ export default function HomePage() {
 
               <div className="mt-10 flex flex-wrap gap-8 text-sm text-foreground/70">
                 <div>
-                  <div className="font-serif text-3xl text-primary">+10</div>
+                  <div className="font-serif text-3xl text-primary">20</div>
                   <div>anos em nutrição clínica</div>
+                </div>
+                <div>
+                  <div className="font-serif text-3xl text-primary">10</div>
+                  <div>anos especialista em alergia alimentar</div>
                 </div>
                 <div>
                   <div className="font-serif text-3xl text-primary">+7.000</div>
                   <div>famílias orientadas</div>
-                </div>
-                <div>
-                  <div className="font-serif text-3xl text-primary">100%</div>
-                  <div>online, pelo Zoom</div>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function HomePage() {
           <PillarCard
             icon={<Stethoscope className="h-6 w-6" />}
             title="Consultas 100% online"
-            description="Atendimento por Zoom em pacotes estruturados, com suporte pós-consulta e lista de marcas seguras."
+            description="Atendimento por videochamada (Google Meet) em pacotes estruturados, com suporte pós-consulta e lista de marcas seguras."
             href="/consultas"
             linkLabel="Ver as consultas"
           />

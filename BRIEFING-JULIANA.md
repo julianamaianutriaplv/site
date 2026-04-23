@@ -77,7 +77,7 @@ Tudo abaixo já está público no site atual dela. Peça que ela **confirme** ou
 - [x] **Nome completo:** Juliana Fernandes Maia
 - [x] **CRN:** CRN-9 22006 (Minas Gerais)
 - [x] **CNPJ:** 33.572.240/0001-10
-- [x] **Experiência:** mais de 10 anos em nutrição clínica
+- [x] **Experiência:** 20 anos em nutrição clínica, 10 anos especialista em alergia alimentar
 - [x] **Especialização:** Alergia Alimentar — APLV
 - [x] **Pós-graduação:** em nutrição clínica (lato sensu)
 - [ ] **Instituição da pós** (opcional — hoje está genérico; se quiser detalhar): _________________________

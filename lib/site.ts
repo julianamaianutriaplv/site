@@ -20,7 +20,8 @@ export const siteConfig = {
     crn: "CRN-9 22006",
     crnState: "MG",
     cnpj: "33.572.240/0001-10",
-    experienceYears: "mais de 10",
+    experienceYears: "20",
+    specialtyYears: "10",
     specialty: "Alergia Alimentar — APLV",
   },
 
