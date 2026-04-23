@@ -1,16 +1,14 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Paleta Direção C — "Clínico-Humano"
+ * Paleta — alinhada ao logo real da Juliana (coral + verde-sage).
  *
- * Primário:    #4A3B7C (roxo-ardósia)
- * Secundário:  #C06C86 (rosa dessaturado)
- * Apoio:       #C8D4C1 (verde-pálido, elementos "natural/saúde")
- * Fundo:       #F6F3EE (creme quente)
+ * Primário:    #D46E6E (coral do coração + wordmark do logo)
+ * Secundário:  #89B89A (verde-sage das folhinhas + "Nutri APLV" do logo)
+ * Fundo:       #F6F3EE (creme quente, registro editorial)
  * Tinta:       #23232B (quase-preto)
  *
- * Mantém a alma roxo/magenta do branding atual da Juliana,
- * mas no registro de clínica boutique premium (autoridade editorial).
+ * Coerência direta com a identidade visual da marca.
  */
 
 const config: Config = {
@@ -32,21 +30,24 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Tokens semânticos
+        // Tokens semânticos — alinhados ao logo
         background: "#F6F3EE",
         foreground: "#23232B",
         primary: {
-          DEFAULT: "#4A3B7C",
-          hover: "#3C3065",
-          soft: "#EFEBF5",
+          // coral do logo — CTAs, títulos, links
+          DEFAULT: "#D46E6E",
+          hover: "#BE5C5C",
+          soft: "#FBEEEE",
           contrast: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#C06C86",
-          hover: "#A85A73",
-          soft: "#F6E8EC",
+          // verde-sage do logo — acentos, eyebrows, "natural/saúde"
+          DEFAULT: "#89B89A",
+          hover: "#72A385",
+          soft: "#E9F0EB",
         },
         accent: {
+          // variação mais suave do verde
           DEFAULT: "#C8D4C1",
           hover: "#B2C2A9",
           soft: "#EEF2EB",

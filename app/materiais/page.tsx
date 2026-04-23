@@ -1,4 +1,5 @@
-import { BookOpen, ChefHat, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import { ShieldCheck } from "lucide-react";
 
 import { LeadForm } from "@/components/lead-form";
 import { Section } from "@/components/section";
@@ -8,33 +9,35 @@ import { whatsappLink } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Materiais gratuitos — APLV",
   description:
-    "Ebooks e guias gratuitos sobre APLV: leitura de rótulos, receitas sem leite aprovadas pelas crianças e mais. Baixe com consentimento LGPD.",
+    "Ebooks de receitas sem leite para crianças APLV: 25 receitas de lanches + 25 receitas doces. Baixe gratuitamente com consentimento LGPD.",
   path: "/materiais",
 });
 
 const materials = [
   {
-    id: "guia-rotulos",
-    icon: <BookOpen className="h-6 w-6" />,
-    title: "Guia prático de leitura de rótulos APLV",
+    id: "receitas-lanches",
+    title: "25 Receitas de Lanches para APLV",
     description:
-      "PDF com passo a passo para identificar leite 'escondido' em rótulos, glossário de termos (caseína, soro, whey etc.) e lista de produtos que merecem atenção redobrada.",
+      "Ebook com 25 receitas de lanches sem leite e sem glúten — testadas em famílias APLV reais, com foto e passo a passo. Bolos, biscoitos, pão de queijo sem queijo, patês e muito mais para a lancheira da escola e para o dia a dia.",
+    cover: "/materiais/capa-lanches.jpg",
+    alt: "Capa do ebook 25 Receitas de Lanches para APLV",
     bullets: [
-      "12 páginas em PDF",
-      "Glossário com 30+ termos que significam leite",
-      "Checklist de 10 itens para usar no mercado",
+      "25 receitas completas, ingredientes e modo de fazer",
+      "Foco em lanche da escola e substitutos do pão/biscoito industrializado",
+      "Alérgicos alimentares (ovo e glúten) contemplados",
     ],
   },
   {
-    id: "receitas-criancas",
-    icon: <ChefHat className="h-6 w-6" />,
-    title: "10 receitas sem leite aprovadas pelas crianças",
+    id: "receitas-doces",
+    title: "25 Receitas Doces para APLV",
     description:
-      "PDF com receitas testadas em famílias APLV reais. Bolo, biscoito, pão de queijo sem queijo, patês, lanches para a escola.",
+      "Ebook com 25 receitas doces sem leite — brigadeiro, pudim, bolos de chocolate, sobremesas geladas e opções para festas. Para a criança APLV não ficar de fora de nenhum momento especial.",
+    cover: "/materiais/capa-doces.jpg",
+    alt: "Capa do ebook 25 Receitas Doces para APLV",
     bullets: [
-      "10 receitas passo a passo",
-      "Foto colorida em cada receita",
-      "Lista de ingredientes substitutos",
+      "25 receitas doces passo a passo, todas sem leite",
+      "Opções para festas, aniversários e sobremesas do dia",
+      "Adaptações para ovo e glúten quando aplicável",
     ],
   },
 ];
@@ -44,56 +47,74 @@ export default function MateriaisPage() {
     <>
       <Section
         eyebrow="Materiais gratuitos"
-        title="Aprender mais, sem custo"
-        description="Guias em PDF para você baixar. Ao se cadastrar, você concorda com o tratamento do seu e-mail conforme a nossa política de privacidade (LGPD)."
+        title="Ebooks de receitas sem leite"
+        description="Desenvolvidos pela Juliana para famílias APLV. Ao se cadastrar, você concorda com o uso do seu e-mail conforme a nossa política de privacidade (LGPD)."
       />
 
       <section className="container pb-20">
-        <div className="grid gap-8 md:gap-10 md:grid-cols-2 max-w-5xl">
+        <div className="grid gap-10 md:grid-cols-2 max-w-5xl">
           {materials.map((m) => (
             <article
               key={m.id}
-              className="rounded-2xl bg-card border border-border p-7 md:p-8 flex flex-col"
+              className="rounded-2xl bg-card border border-border p-6 md:p-8 flex flex-col"
             >
-              <div className="h-12 w-12 rounded-xl bg-secondary-soft text-secondary flex items-center justify-center mb-5">
-                {m.icon}
+              <div className="grid gap-6 sm:grid-cols-[180px_1fr] items-start mb-6">
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-muted shadow-soft mx-auto sm:mx-0 w-full max-w-[220px]">
+                  <Image
+                    src={m.cover}
+                    alt={m.alt}
+                    fill
+                    sizes="220px"
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <h2 className="font-serif text-2xl mb-3 text-primary text-balance">
+                    {m.title}
+                  </h2>
+                  <ul className="space-y-2 text-sm text-foreground/85">
+                    {m.bullets.map((b) => (
+                      <li key={b} className="flex gap-2 items-start">
+                        <span className="text-secondary mt-1">—</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <h2 className="font-serif text-2xl mb-2">{m.title}</h2>
-              <p className="text-foreground/75 mb-5">{m.description}</p>
 
-              <ul className="space-y-2 mb-6 text-sm text-foreground/80">
-                {m.bullets.map((b) => (
-                  <li key={b} className="flex gap-2 items-start">
-                    <span className="text-secondary mt-1">—</span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="text-foreground/75 mb-6 text-pretty">
+                {m.description}
+              </p>
 
               <div className="mt-auto">
                 <LeadForm
                   source={m.id}
-                  cta="Receber o material"
-                  successMessage="Pronto! Em instantes o material chega no seu e-mail."
+                  cta="Receber o ebook"
+                  successMessage="Pronto! Em instantes o ebook chega no seu e-mail."
                 />
               </div>
             </article>
           ))}
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-[1fr_auto] items-center rounded-2xl bg-primary-soft p-8 md:p-10 max-w-5xl">
+        <div className="mt-16 grid gap-6 md:grid-cols-[auto_1fr] items-start rounded-2xl bg-primary-soft p-8 md:p-10 max-w-5xl">
+          <ShieldCheck className="h-10 w-10 text-primary shrink-0" />
           <div>
-            <div className="flex items-center gap-2 text-secondary font-medium text-sm mb-2">
-              <ShieldCheck className="h-4 w-4" />
-              Sobre seus dados
-            </div>
             <h2 className="font-serif text-2xl text-primary mb-3">
               Cuidamos do seu e-mail com responsabilidade
             </h2>
             <ul className="space-y-2 text-foreground/85 text-sm">
-              <li>O e-mail é usado apenas para enviar o material pedido e, com seu aceite, novos conteúdos educativos ocasionais.</li>
-              <li>Você pode descadastrar a qualquer momento com um clique.</li>
-              <li>Seus dados não são vendidos nem compartilhados com terceiros.</li>
+              <li>
+                O e-mail é usado apenas para enviar o ebook pedido e, com seu
+                aceite, novos conteúdos educativos ocasionais.
+              </li>
+              <li>
+                Você pode descadastrar a qualquer momento com um clique.
+              </li>
+              <li>
+                Seus dados não são vendidos nem compartilhados com terceiros.
+              </li>
               <li>Em conformidade com a LGPD (Lei 13.709/2018).</li>
             </ul>
           </div>

@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --color-primary: #4a3b7c;
-    --color-secondary: #c06c86;
+    --color-primary: #d46e6e;
+    --color-secondary: #89b89a;
     --color-accent: #c8d4c1;
     --color-bg: #f6f3ee;
     --color-fg: #23232b;
@@ -29,8 +29,8 @@
   }
 
   ::selection {
-    background: #4a3b7c;
-    color: #f6f3ee;
+    background: #d46e6e;
+    color: #ffffff;
   }
 
   /* Focus ring acessível (WCAG AA) */
