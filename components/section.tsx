@@ -6,7 +6,7 @@ interface SectionProps {
   description?: string;
   className?: string;
   containerClassName?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   as?: "section" | "article" | "div";
   centered?: boolean;
 }
