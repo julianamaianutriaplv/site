@@ -110,14 +110,14 @@ export default function ConsultasPage() {
                   return (
                     <li key={item.text} className="flex gap-3 items-start">
                       {notIncluded ? (
-                        // Bolinha vermelha com X dentro — indica "não incluso"
+                        // Bolinha vermelha outline com X dentro — indica "não incluso"
                         <span
-                          className="shrink-0 mt-0.5 h-5 w-5 rounded-full bg-destructive text-white inline-flex items-center justify-center"
+                          className="shrink-0 mt-0.5 h-5 w-5 rounded-full border border-destructive text-destructive inline-flex items-center justify-center"
                           aria-label="Não incluso"
                           title="Não incluso neste pacote"
                         >
                           <svg
-                            className="h-3 w-3"
+                            className="h-2.5 w-2.5"
                             viewBox="0 0 16 16"
                             fill="none"
                             aria-hidden="true"
@@ -125,7 +125,7 @@ export default function ConsultasPage() {
                             <path
                               d="M4 4l8 8M12 4l-8 8"
                               stroke="currentColor"
-                              strokeWidth="2.5"
+                              strokeWidth="2"
                               strokeLinecap="round"
                             />
                           </svg>
