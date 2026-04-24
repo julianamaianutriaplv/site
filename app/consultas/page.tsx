@@ -12,6 +12,15 @@ import { Button } from "@/components/ui/button";
 import { Section } from "@/components/section";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig, whatsappLink } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+type PackageItem = {
+  text: string;
+  /** false = renderizar como "não incluso" (X vermelho + texto riscado) */
+  included?: boolean;
+  /** true = destacar em negrito (usado para diferenciar retornos entre pacotes) */
+  highlight?: boolean;
+};
 
 export const metadata = buildMetadata({
   title: "Consultas — Acompanhamento nutricional APLV",
@@ -20,21 +29,26 @@ export const metadata = buildMetadata({
   path: "/consultas",
 });
 
-const packages = [
+const packages: Array<{
+  name: string;
+  featured?: boolean;
+  description: string;
+  items: PackageItem[];
+}> = [
   {
     name: "Pacote Completo",
     featured: true,
     description:
       "Acompanhamento mais próximo, indicado para famílias em início de diagnóstico ou casos complexos.",
     items: [
-      "1 consulta inicial (videochamada Google Meet)",
-      "2 consultas de retorno (a cada 20 dias)",
-      "Acompanhamento por WhatsApp por 2 meses em dias úteis",
-      "Prescrição nutricional individualizada",
-      "Indicação de suplementação quando aplicável",
-      "Lista atualizada de marcas seguras",
-      "Nota fiscal para reembolso em planos de saúde",
-      "Declaração para Imposto de Renda",
+      { text: "1 consulta inicial (videochamada Google Meet)" },
+      { text: "2 consultas de retorno (a cada 20 dias)", highlight: true },
+      { text: "Acompanhamento por WhatsApp por 2 meses em dias úteis" },
+      { text: "Prescrição nutricional individualizada" },
+      { text: "Indicação de suplementação quando aplicável" },
+      { text: "Lista atualizada de marcas seguras" },
+      { text: "Nota fiscal para reembolso em planos de saúde" },
+      { text: "Declaração para Imposto de Renda" },
     ],
   },
   {
@@ -42,13 +56,17 @@ const packages = [
     description:
       "Indicado para famílias com plano já em andamento que precisam de ajustes pontuais.",
     items: [
-      "1 consulta inicial (videochamada Google Meet)",
-      "1 consulta de retorno após 20 dias",
-      "Prescrição nutricional individualizada",
-      "Indicação de suplementação quando aplicável",
-      "Lista atualizada de marcas seguras",
-      "Nota fiscal para reembolso em planos de saúde",
-      "Declaração para Imposto de Renda",
+      { text: "1 consulta inicial (videochamada Google Meet)" },
+      { text: "1 consulta de retorno após 20 dias", highlight: true },
+      {
+        text: "Acompanhamento por WhatsApp por 2 meses em dias úteis",
+        included: false,
+      },
+      { text: "Prescrição nutricional individualizada" },
+      { text: "Indicação de suplementação quando aplicável" },
+      { text: "Lista atualizada de marcas seguras" },
+      { text: "Nota fiscal para reembolso em planos de saúde" },
+      { text: "Declaração para Imposto de Renda" },
     ],
   },
 ];
@@ -87,22 +105,54 @@ export default function ConsultasPage() {
                 {pack.description}
               </p>
               <ul className="space-y-3 mb-8">
-                {pack.items.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <CheckCircle2
-                      className={`h-5 w-5 shrink-0 mt-0.5 ${
-                        pack.featured ? "text-accent" : "text-secondary"
-                      }`}
-                    />
-                    <span
-                      className={
-                        pack.featured ? "text-primary-contrast/95" : ""
-                      }
-                    >
-                      {item}
-                    </span>
-                  </li>
-                ))}
+                {pack.items.map((item) => {
+                  const notIncluded = item.included === false;
+                  return (
+                    <li key={item.text} className="flex gap-3 items-start">
+                      {notIncluded ? (
+                        // Bolinha vermelha com X dentro — indica "não incluso"
+                        <span
+                          className="shrink-0 mt-0.5 h-5 w-5 rounded-full bg-destructive text-white inline-flex items-center justify-center"
+                          aria-label="Não incluso"
+                          title="Não incluso neste pacote"
+                        >
+                          <svg
+                            className="h-3 w-3"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M4 4l8 8M12 4l-8 8"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </span>
+                      ) : (
+                        <CheckCircle2
+                          className={cn(
+                            "h-5 w-5 shrink-0 mt-0.5",
+                            pack.featured ? "text-accent" : "text-secondary",
+                          )}
+                          aria-label="Incluso"
+                        />
+                      )}
+                      <span
+                        className={cn(
+                          pack.featured
+                            ? "text-primary-contrast/95"
+                            : "text-foreground",
+                          notIncluded && "line-through opacity-60",
+                          item.highlight && !notIncluded && "font-semibold",
+                        )}
+                      >
+                        {item.text}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
               <Button
                 asChild
