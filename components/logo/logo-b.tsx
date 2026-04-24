@@ -29,8 +29,8 @@ export function LogoB({
       className={cn(className)}
       aria-label="Juliana Maia Nutri APLV"
     >
-      <g transform="translate(6, 12) scale(1.3)">
-        <AppleHeartPaths coral={coral} sage={sage} stroke={3.4} />
+      <g transform="translate(4, 10) scale(1.1)">
+        <AppleHeartPaths coral={coral} sage={sage} stroke={4.5} />
       </g>
 
       <text

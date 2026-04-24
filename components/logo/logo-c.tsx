@@ -29,9 +29,9 @@ export function LogoC({
       className={cn(className)}
       aria-label="Juliana Maia Nutri APLV"
     >
-      {/* Símbolo centralizado no topo */}
-      <g transform="translate(140, 8) scale(1.0)">
-        <AppleHeartPaths coral={coral} sage={sage} stroke={3.4} />
+      {/* Símbolo centralizado no topo (100x100 interno) */}
+      <g transform="translate(130, 8)">
+        <AppleHeartPaths coral={coral} sage={sage} stroke={4.5} />
       </g>
 
       {/* "Juliana Maia" em serif, uma linha, grande */}

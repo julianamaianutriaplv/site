@@ -28,9 +28,9 @@ export function LogoA({
       className={cn(className)}
       aria-label="Juliana Maia Nutri APLV"
     >
-      {/* Símbolo — escala do 80x80 interno para 104x104 posicionado */}
-      <g transform="translate(6, 12) scale(1.3)">
-        <AppleHeartPaths coral={coral} sage={sage} stroke={3.4} />
+      {/* Símbolo (viewBox interno 100x100, escalado para caber) */}
+      <g transform="translate(4, 10) scale(1.1)">
+        <AppleHeartPaths coral={coral} sage={sage} stroke={4.5} />
       </g>
 
       {/* Wordmark */}

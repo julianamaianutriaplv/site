@@ -1,74 +1,92 @@
 import { cn } from "@/lib/utils";
 
-interface AppleHeartPaths {
+interface AppleHeartPathsProps {
   coral?: string;
   sage?: string;
   stroke?: number;
 }
 
 /**
- * Paths da maçã-coração (sem <svg> wrapper, para usar dentro de outro SVG).
- * ViewBox interno: 80x80.
+ * Paths da maçã-coração inclinada (sem <svg> wrapper).
+ *
+ * Fiel ao original da Juliana:
+ * - Coração ASSIMÉTRICO, levemente inclinado à esquerda
+ * - Duas linhas curvas sage (como folhas de movimento/vento) no canto superior esquerdo
+ * - Semente em forma de gota no canto superior direito, inclinada
+ * - Cantos arredondados, traço uniforme
+ *
+ * Refinamentos vs original:
+ * - Traço com ponta rounded
+ * - Curvas Bézier mais suaves
+ * - Proporções ajustadas para legibilidade em tamanhos pequenos
+ *
+ * ViewBox interno: 100x100.
  */
 export function AppleHeartPaths({
   coral = "#D46E6E",
   sage = "#89B89A",
-  stroke = 3.2,
-}: AppleHeartPaths) {
+  stroke = 4.5,
+}: AppleHeartPathsProps) {
   return (
     <g>
-      {/* Caule */}
+      {/* Duas linhas curvas sage — movimento/folhas no canto superior esquerdo */}
       <path
-        d="M 38 18 C 36 14, 32 12, 28 12"
+        d="M 8 22 C 18 12, 30 10, 38 18"
         stroke={sage}
         strokeWidth={stroke}
         strokeLinecap="round"
         fill="none"
       />
-      {/* Folha */}
       <path
-        d="M 22 9 C 18 7, 14 9, 14 14 C 14 18, 19 19, 23 17 C 26 15, 26 11, 22 9 Z"
+        d="M 14 28 C 22 20, 32 18, 40 24"
         stroke={sage}
         strokeWidth={stroke}
-        strokeLinejoin="round"
-        fill="none"
-      />
-      {/* Nervura da folha */}
-      <path
-        d="M 15 14 C 18 13, 21 13, 23 12"
-        stroke={sage}
-        strokeWidth={stroke * 0.7}
         strokeLinecap="round"
         fill="none"
       />
-      {/* Coração-maçã */}
+
+      {/*
+        Coração-maçã inclinado.
+        Começa no topo (ligeiramente deslocado à direita do centro, onde a semente está),
+        faz o lobo direito, desce para a ponta (deslocada à esquerda),
+        sobe pelo lobo esquerdo e retorna.
+      */}
       <path
-        d="M 40 70
-           C 18 54, 14 38, 22 28
-           C 28 21, 35 23, 40 30
-           C 45 23, 52 21, 58 28
-           C 66 38, 62 54, 40 70 Z"
+        d="M 48 30
+           C 52 22, 64 20, 72 26
+           C 82 34, 80 52, 70 64
+           C 62 74, 52 82, 42 88
+           C 34 80, 24 68, 22 54
+           C 20 40, 28 28, 38 28
+           C 44 28, 47 30, 48 30 Z"
         stroke={coral}
         strokeWidth={stroke}
         strokeLinejoin="round"
         strokeLinecap="round"
         fill="none"
       />
-      {/* Semente/gota interna */}
+
+      {/*
+        Semente em forma de gota, inclinada ~20° para a direita,
+        posicionada no lobo superior direito do coração.
+      */}
       <path
-        d="M 40 36
-           C 36 36, 34 39, 34 43
-           C 34 47, 37 49, 40 49
-           C 43 49, 46 47, 46 43
-           C 46 39, 44 36, 40 36 Z"
-        fill={coral}
+        d="M 54 34
+           C 50 36, 49 42, 52 46
+           C 56 48, 61 46, 62 40
+           C 63 36, 59 32, 54 34 Z"
+        stroke={coral}
+        strokeWidth={stroke}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        fill="none"
       />
     </g>
   );
 }
 
 /**
- * Versão standalone (com <svg> wrapper), para uso isolado.
+ * Versão standalone com wrapper <svg>.
  */
 interface AppleHeartProps {
   className?: string;
@@ -85,7 +103,7 @@ export function AppleHeart({
 }: AppleHeartProps) {
   return (
     <svg
-      viewBox="0 0 80 80"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={cn(className)}

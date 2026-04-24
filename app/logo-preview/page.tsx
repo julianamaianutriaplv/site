@@ -81,8 +81,43 @@ export default function LogoPreviewPage() {
       <Section
         eyebrow="Interno · não indexado"
         title="3 variações mantendo o padrão da logo original"
-        description="Todas as opções mantêm o símbolo da maçã-coração com folha sage. As diferenças estão em tipografia e layout. Cada uma é testada em 3 contextos: tamanho grande, ícone pequeno (favicon) e fundo escuro."
+        description="Todas as opções mantêm o símbolo da maçã-coração inclinada com as duas curvinhas sage no topo. As diferenças estão em tipografia e layout."
       />
+
+      {/* Comparação lado a lado do SÍMBOLO (original vs refinado) */}
+      <section className="container pb-12">
+        <div className="rounded-2xl border border-border bg-card p-8 md:p-10 max-w-4xl">
+          <h2 className="font-serif text-2xl text-primary mb-2">
+            Primeiro: o símbolo refinado vs o original
+          </h2>
+          <p className="text-foreground/75 mb-8 text-sm max-w-2xl">
+            Só o ícone, isolado, em tamanho grande. Confira se o desenho
+            refinado está fiel ao original antes de olhar as 3 composições
+            completas abaixo.
+          </p>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col items-center gap-3 p-6 bg-background rounded-xl">
+              <div className="text-xs uppercase tracking-wider text-foreground/60">
+                Original
+              </div>
+              <div className="relative w-48 h-48">
+                <Image
+                  src="/logo.jpg"
+                  alt="Logo original"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-3 p-6 bg-background rounded-xl">
+              <div className="text-xs uppercase tracking-wider text-foreground/60">
+                Refinado (SVG)
+              </div>
+              <AppleHeart className="w-40 h-40" />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="container pb-24">
         <div className="space-y-16">
