@@ -10,15 +10,12 @@ interface AppleHeartPathsProps {
  * Paths da maçã-coração inclinada (sem <svg> wrapper).
  *
  * Fiel ao original da Juliana:
- * - Coração ASSIMÉTRICO, levemente inclinado à esquerda
- * - Duas linhas curvas sage (como folhas de movimento/vento) no canto superior esquerdo
- * - Semente em forma de gota no canto superior direito, inclinada
- * - Cantos arredondados, traço uniforme
- *
- * Refinamentos vs original:
- * - Traço com ponta rounded
- * - Curvas Bézier mais suaves
- * - Proporções ajustadas para legibilidade em tamanhos pequenos
+ * - Coração OUTLINE inclinado ~8° no sentido horário
+ *   (topo leva para a DIREITA, base leva para a ESQUERDA)
+ * - Duas linhas curvas sage no canto superior esquerdo
+ *   (permanecem ancoradas, não giram junto)
+ * - Semente-gota OUTLINE no lobo superior direito, inclinada
+ *   na mesma direção do coração
  *
  * ViewBox interno: 100x100.
  */
@@ -29,58 +26,56 @@ export function AppleHeartPaths({
 }: AppleHeartPathsProps) {
   return (
     <g>
-      {/* Duas linhas curvas sage — movimento/folhas no canto superior esquerdo */}
+      {/* 2 curvas sage — ancoradas no canto superior esquerdo,
+          sem girar junto com o coração (igual ao original) */}
       <path
-        d="M 8 22 C 18 12, 30 10, 38 18"
+        d="M 10 24 C 22 14, 34 12, 42 18"
         stroke={sage}
         strokeWidth={stroke}
         strokeLinecap="round"
         fill="none"
       />
       <path
-        d="M 14 28 C 22 20, 32 18, 40 24"
+        d="M 14 32 C 24 24, 34 22, 44 26"
         stroke={sage}
         strokeWidth={stroke}
         strokeLinecap="round"
         fill="none"
       />
 
-      {/*
-        Coração-maçã inclinado.
-        Começa no topo (ligeiramente deslocado à direita do centro, onde a semente está),
-        faz o lobo direito, desce para a ponta (deslocada à esquerda),
-        sobe pelo lobo esquerdo e retorna.
-      */}
-      <path
-        d="M 48 30
-           C 52 22, 64 20, 72 26
-           C 82 34, 80 52, 70 64
-           C 62 74, 52 82, 42 88
-           C 34 80, 24 68, 22 54
-           C 20 40, 28 28, 38 28
-           C 44 28, 47 30, 48 30 Z"
-        stroke={coral}
-        strokeWidth={stroke}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        fill="none"
-      />
+      {/* Coração + semente inclinados ~8° no sentido horário.
+          Rotação aplicada em torno de (52, 58) que é o centro visual
+          aproximado da maçã. */}
+      <g transform="rotate(8 52 58)">
+        {/* Coração-maçã outline */}
+        <path
+          d="M 52 32
+             C 56 24, 68 22, 76 28
+             C 85 36, 82 56, 72 66
+             C 64 74, 56 82, 46 86
+             C 38 78, 28 66, 26 54
+             C 24 40, 32 28, 42 28
+             C 48 28, 51 30, 52 32 Z"
+          stroke={coral}
+          strokeWidth={stroke}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          fill="none"
+        />
 
-      {/*
-        Semente em forma de gota, inclinada ~20° para a direita,
-        posicionada no lobo superior direito do coração.
-      */}
-      <path
-        d="M 54 34
-           C 50 36, 49 42, 52 46
-           C 56 48, 61 46, 62 40
-           C 63 36, 59 32, 54 34 Z"
-        stroke={coral}
-        strokeWidth={stroke}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        fill="none"
-      />
+        {/* Semente em forma de gota, outline, no lobo superior direito */}
+        <path
+          d="M 60 36
+             C 56 38, 54 44, 57 48
+             C 61 50, 66 47, 66 41
+             C 66 37, 63 34, 60 36 Z"
+          stroke={coral}
+          strokeWidth={stroke}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          fill="none"
+        />
+      </g>
     </g>
   );
 }
