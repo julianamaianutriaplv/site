@@ -11,12 +11,21 @@ Cada item tem **por que importa** e **onde no código** é inserido.
 ## 🔴 Bloqueadores para go-live
 
 ### 1. ~~Domínio definitivo~~ ✅ DECIDIDO
-- **Domínio:** `julianamaianutriaplv.com` (apex, `.com`)
-- **Registro e DNS:** Squarespace
-- **Hospedagem:** Vercel
-- **E-mail:** Google Workspace já ativo no mesmo domínio
+- **Domínio:** `julianamaianutriaplv.com.br` (apex) — este site **substitui** o
+  WordPress que estava na Hostinger
+- **Registro:** Registro.br · **DNS:** Cloudflare
+- **Hospedagem:** Cloudflare Workers (build estático)
+- **E-mail:** Hostinger, `suporte@julianamaianutriaplv.com.br` (os MX ficam
+  onde estão — o plano da Hostinger continua ativo só pelo e-mail)
+- **`.com`:** estava em `clientHold` na Squarespace, nunca entrou no ar. Depois
+  de destravado, passa a redirecionar 301 para o `.com.br`
 - **Deploy:** passo a passo em `DEPLOY.md`
-- **Canibalização de SEO:** não há — o site atual em `.com.br` é domínio distinto para o Google
+- **Canibalização de SEO:** não se aplica — não há dois sites. As URLs antigas
+  do WordPress com equivalente estão mapeadas em `public/_redirects`
+
+> Correção (31/08/2026): a decisão registrada aqui antes — `.com` na Vercel com
+> DNS Squarespace e Google Workspace — nunca chegou a existir. O `.com` estava
+> suspenso e não resolvia nada, e o e-mail sempre foi Hostinger no `.com.br`.
 
 ### 2. Valores das consultas
 - **O que:** valores do Pacote Completo e Pacote Básico
@@ -29,7 +38,12 @@ Cada item tem **por que importa** e **onde no código** é inserido.
 - **Por que:** hoje todo CTA "agendar" aponta para WhatsApp; integração direta reduz fricção
 - **Onde:** `.env.local` → `NEXT_PUBLIC_BOOKING_URL`; `lib/site.ts` → `booking.url`
 
-### 4. Fotos profissionais
+### 4. ~~Fotos profissionais~~ ✅ ENTREGUE
+
+Fotos reais em `public/` desde o commit `9a16260`.
+
+<details><summary>briefing original</summary>
+
 - **O que:** fotos em alta resolução da Juliana para uso web (Home, Sobre, social cards)
 - **Requisitos:**
   - Direitos autorais liberados (fotógrafa ou selfie de qualidade)
@@ -43,17 +57,33 @@ Cada item tem **por que importa** e **onde no código** é inserido.
   - Os componentes `HeroVisual` e `ProfilePhoto` detectam automaticamente e substituem os placeholders decorativos pelas fotos reais.
 - **Enquanto não chega:** o site renderiza placeholders visuais bonitos, sem quebrar o layout.
 
-### 5. Logo / identidade visual
+</details>
+
+### 5. ~~Logo / identidade visual~~ ✅ ENTREGUE
+
+Logo real em `public/logo.jpg`; favicon, ícones 192/512, apple-touch-icon e OG image gerados a partir dele.
+
+<details><summary>briefing original</summary>
+
 - **O que:** logo em SVG (ou PNG em alta) para usar no header, footer e favicon
 - **Onde:**
   - Coloque em `/public/logo.svg` e favicon em `/public/favicon.ico`
   - Substituir o componente `components/brand-mark.tsx` pelo uso de `<Image src="/logo.svg" ... />`
   - **Enquanto não chega:** o `BrandMark` atual renderiza um monograma SVG gerado programaticamente, bonito e coerente com a paleta. Não quebra layout.
 
-### 6. E-mail oficial
+</details>
+
+### 6. ~~E-mail oficial~~ ✅ DEFINIDO
+
+`suporte@julianamaianutriaplv.com.br` — a caixa que a Juliana já usa.
+
+<details><summary>briefing original</summary>
+
 - **O que:** e-mail profissional para contato LGPD e geral
 - **Por que:** usado na política de privacidade, termos, footer
 - **Onde:** `lib/site.ts` → `contact.email`
+
+</details>
 
 ### 7. Revisão jurídica de Privacidade e Termos
 - **O que:** advogado(a) revisar `app/privacidade/page.tsx` e `app/termos/page.tsx`
@@ -147,7 +177,8 @@ Grupo de Telegram ou Discord linkado com regras claras de comunidade.
 - ✅ `BRIEFING-JULIANA.md` com checklist formatado para conversa com a Juliana
 
 **Próximas pendências reais (dependem da Juliana):**
-- 🔴 Fotos, logo oficial, e-mail oficial
+- ✅ Fotos, logo oficial, e-mail oficial
+- 🔴 Valores das consultas · link de agendamento · revisão jurídica
 - 🟡 Decisão de provider de e-mail (a infra está pronta)
 - 🟡 PDFs dos ebooks
 - 🟡 ID do Google Analytics
