@@ -8,29 +8,29 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-muted/30 mt-16">
+    <footer className="bg-foreground text-white/70 mt-0">
       <div className="container py-12 md:py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <BrandMark />
-            <p className="mt-4 text-sm text-foreground/70 max-w-md">
+            <p className="mt-4 text-sm text-white/70 max-w-md">
               {siteConfig.tagline}
             </p>
-            <p className="mt-4 text-xs text-foreground/60">
+            <p className="mt-4 text-xs text-white/45">
               {siteConfig.professional.fullName} · {siteConfig.professional.crn} ·
               Nutricionista Clínica especialista em APLV
             </p>
           </div>
 
           <div>
-            <h3 className="font-serif text-base text-foreground mb-3">
+            <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-white/50 mb-4">
               Navegação
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/sobre"
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                 >
                   Sobre
                 </Link>
@@ -38,7 +38,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/aplv"
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                 >
                   O que é APLV
                 </Link>
@@ -46,7 +46,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/consultas"
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                 >
                   Consultas
                 </Link>
@@ -54,7 +54,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/blog"
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                 >
                   Blog
                 </Link>
@@ -62,7 +62,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/perguntas-frequentes"
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                 >
                   Perguntas frequentes
                 </Link>
@@ -70,7 +70,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/materiais"
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                 >
                   Materiais gratuitos
                 </Link>
@@ -79,14 +79,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-serif text-base text-foreground mb-3">
+            <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-white/50 mb-4">
               Contato
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/contato"
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                 >
                   Página de contato
                 </Link>
@@ -94,7 +94,7 @@ export function Footer() {
               <li>
                 <a
                   href={`https://wa.me/${siteConfig.contact.whatsapp}`}
-                  className="text-foreground/70 hover:text-primary"
+                  className="text-white/75 hover:text-sage"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -109,7 +109,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="h-9 w-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary"
+                className="h-9 w-9 rounded-full border border-white/20 flex items-center justify-center text-white/75 hover:border-sage hover:text-sage"
               >
                 <Instagram className="h-4 w-4" />
               </a>
@@ -118,7 +118,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="h-9 w-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary"
+                className="h-9 w-9 rounded-full border border-white/20 flex items-center justify-center text-white/75 hover:border-sage hover:text-sage"
               >
                 <Youtube className="h-4 w-4" />
               </a>
@@ -127,7 +127,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="h-9 w-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary"
+                className="h-9 w-9 rounded-full border border-white/20 flex items-center justify-center text-white/75 hover:border-sage hover:text-sage"
               >
                 <Facebook className="h-4 w-4" />
               </a>
@@ -135,22 +135,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-border flex flex-col md:flex-row gap-4 justify-between text-xs text-foreground/60">
+        <div className="mt-10 pt-6 border-t border-white/12 flex flex-col md:flex-row gap-4 justify-between text-xs text-white/45">
           <div>
             © {year} {siteConfig.professional.fullName}. Todos os direitos
             reservados.
           </div>
           <div className="flex gap-4">
-            <Link href="/privacidade" className="hover:text-primary">
+            <Link href="/privacidade" className="hover:text-sage">
               Política de privacidade
             </Link>
-            <Link href="/termos" className="hover:text-primary">
+            <Link href="/termos" className="hover:text-sage">
               Termos de uso
             </Link>
           </div>
         </div>
 
-        <div className="mt-6 rounded-lg bg-muted/60 p-4 text-xs leading-relaxed text-foreground/70">
+        <div className="mt-6 rounded-lg bg-white/[.06] p-4 text-xs leading-relaxed text-white/60">
           <strong className="text-foreground/85">Aviso importante:</strong>{" "}
           Todo o conteúdo deste site é educativo e informativo e não substitui
           consulta individualizada com profissional de saúde habilitado. Nenhuma

@@ -4,19 +4,30 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * A ação é VERDE, não coral.
+ *
+ * No sistema de cor deste site coral significa "contém leite" — um aviso.
+ * Se os CTAs também fossem coral, o olho deixaria de distinguir aviso de
+ * ação e o código de cor perderia a função. Por isso `primary` é o verde.
+ */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         primary:
-          "bg-primary text-primary-contrast hover:bg-primary-hover shadow-soft",
-        secondary:
           "bg-secondary text-white hover:bg-secondary-hover shadow-soft",
         outline:
-          "border border-primary/30 bg-transparent text-primary hover:bg-primary-soft",
-        ghost: "text-primary hover:bg-primary-soft",
-        link: "text-primary underline-offset-4 hover:underline rounded-none px-0",
+          "border border-border-strong bg-transparent text-foreground hover:bg-surface",
+        // Sobre a faixa verde escura.
+        light:
+          "bg-white text-secondary-strong hover:bg-surface shadow-soft",
+        // Reservado para quando a ação for sobre "contém leite".
+        coral:
+          "bg-primary text-primary-contrast hover:bg-primary-hover shadow-soft",
+        ghost: "text-secondary-strong hover:bg-secondary-soft",
+        link: "text-secondary-strong underline-offset-4 hover:underline rounded-none px-0",
       },
       size: {
         sm: "h-9 px-4",

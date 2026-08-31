@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { DM_Mono, Fraunces, Ubuntu } from "next/font/google";
 import Script from "next/script";
 
 import "./globals.css";
@@ -12,23 +12,34 @@ import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { buildMetadata, medicalBusinessJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
+// SOFT e WONK são os eixos que dão o caráter do Fraunces — sem eles o
+// serifado fica genérico. Ver app/globals.css, font-variation-settings.
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
   display: "swap",
-  axes: ["opsz"],
+  axes: ["SOFT", "WONK", "opsz"],
 });
 
-const inter = Inter({
+const ubuntu = Ubuntu({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "700"],
+  variable: "--font-ubuntu",
+  display: "swap",
+});
+
+// Usado nos "olhos" de seção e nos rótulos curtos.
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-dm-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = buildMetadata();
 
 export const viewport: Viewport = {
-  themeColor: "#D46E6E",
+  themeColor: "#46823E",
   width: "device-width",
   initialScale: 1,
 };
@@ -39,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="pt-BR" className={`${fraunces.variable} ${ubuntu.variable} ${dmMono.variable}`}>
       <body className="min-h-screen flex flex-col">
         <a
           href="#conteudo"

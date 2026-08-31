@@ -156,7 +156,7 @@ export default function ConsultasPage() {
               </ul>
               <Button
                 asChild
-                variant={pack.featured ? "secondary" : "primary"}
+                variant={pack.featured ? "primary" : "outline"}
                 size="lg"
                 className="w-full sm:w-auto"
               >

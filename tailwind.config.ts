@@ -1,14 +1,20 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Paleta — alinhada ao logo real da Juliana (coral + verde-sage).
+ * Paleta — a cor tem função, não é enfeite.
  *
- * Primário:    #D46E6E (coral do coração + wordmark do logo)
- * Secundário:  #89B89A (verde-sage das folhinhas + "Nutri APLV" do logo)
- * Fundo:       #F6F3EE (creme quente, registro editorial)
- * Tinta:       #23232B (quase-preto)
+ * O eixo do site é a pergunta que a mãe faz no corredor do mercado:
+ * "isso aqui tem leite?". Então a cor responde:
  *
- * Coerência direta com a identidade visual da marca.
+ *   coral (#ED6D6B)  → CONTÉM leite
+ *   âmbar (#B0741C)  → VARIA, confira a linha ALÉRGICOS
+ *   verde (#46823E)  → SEGURO, e por isso é também a cor de ação (CTA)
+ *
+ * Os CTAs são verdes de propósito: se fossem coral, competiriam
+ * visualmente com os avisos de "contém leite" e diluiriam o código.
+ *
+ * Títulos em terra (#9D3B2B) em vez de preto — puxa o serifado para
+ * o mesmo território quente do logo sem gritar como o coral.
  */
 
 const config: Config = {
@@ -30,45 +36,67 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Tokens semânticos — alinhados ao logo
-        background: "#F6F3EE",
-        foreground: "#23232B",
+        // superfícies
+        background: "#FFFEF8",
+        surface: {
+          DEFAULT: "#FBF6EC",
+          pessego: "#F8E5D6",
+          "pessego-2": "#FCEFE6",
+        },
+        foreground: "#2A302F",
+
+        // coral — "contém leite" e marca
         primary: {
-          // coral do logo — CTAs, títulos, links
-          DEFAULT: "#D46E6E",
-          hover: "#BE5C5C",
-          soft: "#FBEEEE",
+          DEFAULT: "#ED6D6B",
+          hover: "#B53A33",
+          soft: "#FBDDDA",
+          strong: "#B53A33",
           contrast: "#FFFFFF",
         },
+        // verde — "seguro" e ação
         secondary: {
-          // verde-sage do logo — acentos, eyebrows, "natural/saúde"
-          DEFAULT: "#89B89A",
-          hover: "#72A385",
-          soft: "#E9F0EB",
+          DEFAULT: "#46823E",
+          hover: "#2F5C29",
+          soft: "#E4F0DF",
+          strong: "#2F5C29",
+          contrast: "#FFFFFF",
         },
+        // âmbar — "varia, confira"
+        caution: {
+          DEFAULT: "#B0741C",
+          hover: "#8A5A12",
+          soft: "#FAEBD3",
+          strong: "#8A5A12",
+        },
+
+        terra: "#9D3B2B",
+        sage: "#8ECAAC",
+
         accent: {
-          // variação mais suave do verde
-          DEFAULT: "#C8D4C1",
-          hover: "#B2C2A9",
-          soft: "#EEF2EB",
+          DEFAULT: "#8ECAAC",
+          hover: "#72A385",
+          soft: "#E4F0DF",
         },
         muted: {
-          DEFAULT: "#EDE8DF",
-          foreground: "#6B6B74",
+          DEFAULT: "#FBF6EC",
+          foreground: "#5C6360",
         },
-        border: "#E2DDD2",
+        subtle: "#6E7572",
+        border: "rgba(42,48,47,.13)",
+        "border-strong": "rgba(42,48,47,.22)",
         card: {
           DEFAULT: "#FFFFFF",
-          foreground: "#23232B",
+          foreground: "#2A302F",
         },
         destructive: {
-          DEFAULT: "#B53D3D",
+          DEFAULT: "#B53A33",
           foreground: "#FFFFFF",
         },
       },
       fontFamily: {
-        serif: ["var(--font-fraunces)", "Georgia", "serif"],
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        serif: ["var(--font-fraunces)", "Iowan Old Style", "Georgia", "serif"],
+        sans: ["var(--font-ubuntu)", "system-ui", "sans-serif"],
+        mono: ["var(--font-dm-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
         // Escala tipográfica 1.25 (major third), base 16
@@ -84,13 +112,17 @@ const config: Config = {
         "6xl": ["3.75rem", { lineHeight: "1.05" }],
       },
       borderRadius: {
-        lg: "0.75rem",
-        xl: "1rem",
+        lg: "0.625rem",
+        xl: "1.125rem",
         "2xl": "1.5rem",
       },
+      maxWidth: {
+        shell: "1180px",
+      },
       boxShadow: {
-        soft: "0 1px 2px rgba(35,35,43,0.04), 0 4px 12px rgba(35,35,43,0.06)",
-        card: "0 4px 20px rgba(74,59,124,0.08)",
+        soft: "0 2px 4px rgba(42,48,47,.04), 0 12px 28px -12px rgba(42,48,47,.18)",
+        card: "0 2px 4px rgba(42,48,47,.04), 0 12px 28px -12px rgba(42,48,47,.18)",
+        lift: "0 4px 8px rgba(42,48,47,.05), 0 28px 56px -20px rgba(157,59,43,.28)",
       },
       keyframes: {
         "accordion-down": {

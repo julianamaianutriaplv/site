@@ -3,98 +3,115 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --color-primary: #d46e6e;
-    --color-secondary: #89b89a;
-    --color-accent: #c8d4c1;
-    --color-bg: #f6f3ee;
-    --color-fg: #23232b;
-  }
-
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  body {
-    @apply bg-background text-foreground font-sans;
-    font-feature-settings: "ss01", "cv11";
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
 
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  /* Fraunces é variável: SOFT arredonda as terminações e WONK liga as formas
+     "erradas" do g e do y. É o que dá personalidade ao serifado em vez de
+     parecer Georgia. */
   h1, h2, h3, h4 {
-    @apply font-serif text-foreground;
+    @apply font-serif text-terra text-balance;
+    font-variation-settings: "SOFT" 40, "WONK" 1;
+    font-weight: 600;
+    line-height: 1.08;
     letter-spacing: -0.015em;
   }
 
-  ::selection {
-    background: #d46e6e;
-    color: #ffffff;
-  }
+  a { text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
 
-  /* Focus ring acessível (WCAG AA) */
+  ::selection { background: #ED6D6B; color: #ffffff; }
+
   *:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+    outline: 3px solid #ED6D6B;
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
-  .container-prose {
-    @apply mx-auto max-w-[68ch] px-5 md:px-0;
+  /* ---------------------------------------------------------------- casca */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 md:px-8;
   }
 
-  .prose-custom {
-    @apply text-foreground/90 leading-relaxed;
+  .secao {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
   }
 
-  .prose-custom h2 {
-    @apply font-serif text-3xl mt-12 mb-4 text-primary;
+  /* Faixas de fundo que alternam o ritmo vertical da página. */
+  .faixa-creme { @apply bg-surface; }
+  .faixa-pessego { @apply bg-surface-pessego; }
+  .faixa-verde { @apply bg-secondary-strong text-white; }
+  .faixa-verde h1, .faixa-verde h2, .faixa-verde h3 { @apply text-white; }
+
+  /* -------------------------------------------------------------- "olho" */
+  /* Rótulo curto acima do título: traço coral + mono espaçado. */
+  .olho {
+    @apply font-mono text-xs uppercase tracking-[0.16em] text-subtle
+           inline-flex items-center gap-3;
+  }
+  .olho::before {
+    content: "";
+    @apply block h-px w-7 bg-primary;
+  }
+  .olho-centro { @apply justify-center; }
+
+  /* ------------------------------------------------------------- marcador */
+  /* Marca-texto atrás da palavra-chave do H1. */
+  .marcador {
+    @apply text-primary;
+    background-image: linear-gradient(transparent 62%, #FBDDDA 62%);
+    background-repeat: no-repeat;
+    /* Sem `clone`, o marcador some no meio quando a frase quebra de linha
+       e sobra um degrau no fim da primeira linha. */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-inline: 0.06em;
   }
 
-  .prose-custom h3 {
-    @apply font-serif text-2xl mt-8 mb-3 text-foreground;
-  }
+  /* --------------------------------------------------------------- prosa */
+  .container-prose { @apply mx-auto max-w-[68ch] px-5 md:px-0; }
 
-  .prose-custom p {
-    @apply my-4 text-lg;
-  }
-
+  .prose-custom { @apply text-foreground/90 leading-relaxed; }
+  .prose-custom h2 { @apply font-serif text-3xl mt-12 mb-4 text-terra; }
+  .prose-custom h3 { @apply font-serif text-2xl mt-8 mb-3 text-terra; }
+  .prose-custom p { @apply my-4 text-lg; }
   .prose-custom a {
-    @apply text-primary underline decoration-secondary/40 underline-offset-4 hover:decoration-secondary;
+    @apply text-secondary-strong underline decoration-secondary/40
+           underline-offset-4 hover:decoration-secondary hover:text-primary-strong;
   }
-
-  .prose-custom ul {
-    @apply my-4 pl-6 list-disc space-y-2;
-  }
-
-  .prose-custom ol {
-    @apply my-4 pl-6 list-decimal space-y-2;
-  }
-
+  .prose-custom ul { @apply my-4 pl-6 list-disc space-y-2; }
+  .prose-custom ol { @apply my-4 pl-6 list-decimal space-y-2; }
   .prose-custom blockquote {
-    @apply border-l-4 border-secondary pl-6 my-6 italic text-foreground/75;
+    @apply border-l-4 border-primary pl-6 my-6 font-serif text-2xl text-terra not-italic;
   }
-
-  .prose-custom strong {
-    @apply font-semibold text-foreground;
-  }
-
-  .prose-custom code {
-    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
-  }
-
-  .prose-custom hr {
-    @apply my-12 border-border;
-  }
+  .prose-custom strong { @apply font-semibold text-foreground; }
+  .prose-custom code { @apply bg-surface px-1.5 py-0.5 rounded text-sm font-mono; }
+  .prose-custom hr { @apply my-12 border-border; }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 
-  .text-pretty {
-    text-wrap: pretty;
+  /* Máscara em arco usada nos retratos. */
+  .arco {
+    border-radius: 50% 50% var(--raio-arco, 1.125rem) var(--raio-arco, 1.125rem) /
+                   42% 42% var(--raio-arco, 1.125rem) var(--raio-arco, 1.125rem);
   }
 }
