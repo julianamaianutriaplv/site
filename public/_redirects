@@ -60,14 +60,17 @@
 /depoimentos-venda                                                                           /sobre                   301
 
 # --- Conteúdo ---
+# Os dois artigos abaixo iam para /aplv por falta de equivalente. Agora têm
+# artigo próprio, então apontam para o destino certo — 301 para conteúdo
+# equivalente vale muito mais que 301 para página genérica.
 /diario-de-bordo/                                                                            /blog                    301
 /diario-de-bordo                                                                             /blog                    301
 /aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-reacao-do-tipo-fpies/                        /blog/fpies-o-que-e      301
 /aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-reacao-do-tipo-fpies                         /blog/fpies-o-que-e      301
-/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-alergia-ige-mediada-nao-mediada-ou-mista/    /aplv                    301
-/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-alergia-ige-mediada-nao-mediada-ou-mista     /aplv                    301
-/como-saber-se-meu-filhoa-tem-aplv-alergia-ao-leite-de-vaca-ou-a-outros-alimentos-fazendo-o-correto-teste-de-provocacao-oral-tpo-para-fechamento-de-diagnostico-das-alergias-alimentares/ /aplv                    301
-/como-saber-se-meu-filhoa-tem-aplv-alergia-ao-leite-de-vaca-ou-a-outros-alimentos-fazendo-o-correto-teste-de-provocacao-oral-tpo-para-fechamento-de-diagnostico-das-alergias-alimentares /aplv                    301
+/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-alergia-ige-mediada-nao-mediada-ou-mista/    /blog/tipos-de-reacao-aplv     301
+/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-alergia-ige-mediada-nao-mediada-ou-mista     /blog/tipos-de-reacao-aplv     301
+/como-saber-se-meu-filhoa-tem-aplv-alergia-ao-leite-de-vaca-ou-a-outros-alimentos-fazendo-o-correto-teste-de-provocacao-oral-tpo-para-fechamento-de-diagnostico-das-alergias-alimentares/ /blog/teste-provocacao-oral-tpo 301
+/como-saber-se-meu-filhoa-tem-aplv-alergia-ao-leite-de-vaca-ou-a-outros-alimentos-fazendo-o-correto-teste-de-provocacao-oral-tpo-para-fechamento-de-diagnostico-das-alergias-alimentares /blog/teste-provocacao-oral-tpo 301
 
 # --- Funil descontinuado, mas com intenção comercial clara ---
 /workshop/                                                                                   /consultas               301
