@@ -31,7 +31,7 @@ export const siteConfig = {
     whatsappSupport:
       process.env.NEXT_PUBLIC_WHATSAPP_SUPPORT ?? "5531999191083",
     // E-mail no domínio .com.br (MX na Hostinger — não mexer)
-    email: "contato@julianamaianutriaplv.com.br",
+    email: "suporte@julianamaianutriaplv.com.br",
   },
 
   social: {
