@@ -1,0 +1,15 @@
+{
+  "name": "Juliana Maia — Nutri APLV",
+  "short_name": "Nutri APLV",
+  "description": "Referência em alergia à proteína do leite de vaca (APLV) infantil.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F6F3EE",
+  "theme_color": "#D46E6E",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

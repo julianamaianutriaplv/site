@@ -5,6 +5,7 @@ import Script from "next/script";
 import "./globals.css";
 
 import { CookieBanner } from "@/components/cookie-banner";
+import { JsonLd } from "@/components/json-ld";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
@@ -55,14 +56,7 @@ export default function RootLayout({
         <WhatsAppFloat />
         <CookieBanner />
 
-        <Script
-          id="ld-json-org"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(medicalBusinessJsonLd()),
-          }}
-        />
+        <JsonLd id="ld-json-org" data={medicalBusinessJsonLd()} />
 
         {siteConfig.analytics.gaId ? (
           <>

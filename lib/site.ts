@@ -11,7 +11,7 @@ export const siteConfig = {
     "Referência em alergia à proteína do leite de vaca (APLV) infantil. Conteúdo clínico acolhedor, acompanhamento nutricional e orientação para mães em jornada APLV.",
 
   // Domínio público — fallback para build sem env; em prod vem de NEXT_PUBLIC_SITE_URL
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://julianamaianutriaplv.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://julianamaianutriaplv.com.br",
   ogImage: "/og-default.png",
 
   // Credenciais públicas (extraídas do site atual da Juliana)
@@ -30,8 +30,8 @@ export const siteConfig = {
     whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5531999191083",
     whatsappSupport:
       process.env.NEXT_PUBLIC_WHATSAPP_SUPPORT ?? "5531999191083",
-    // Domínio .com (novo); Google Workspace entrega o e-mail
-    email: "contato@julianamaianutriaplv.com",
+    // E-mail no domínio .com.br (MX na Hostinger — não mexer)
+    email: "contato@julianamaianutriaplv.com.br",
   },
 
   social: {

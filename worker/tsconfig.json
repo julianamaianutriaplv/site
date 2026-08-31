@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "types": ["@cloudflare/workers-types"],
+    "jsx": "react-jsx",
+    "plugins": [],
+    "noEmit": true
+  },
+  "include": ["./**/*.ts", "../lib/lead-capture.ts"],
+  "exclude": []
+}

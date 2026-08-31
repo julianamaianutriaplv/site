@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "julianamaianutriaplv",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-31",
+
+  // Build estático do Next (`npm run build` gera `out/`).
+  // Assets casam primeiro e são servidos pela edge sem invocar o Worker;
+  // só o que não casa (—/api/lead e 404) cai no worker/index.ts.
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    // `/contato/` (URL antiga do WordPress) → 308 → `/contato`
+    "html_handling": "drop-trailing-slash",
+    // Não entrega a 404 aqui: deixa passar pro Worker, que trata /api/lead
+    "not_found_handling": "none"
+  },
+
+  // Deploy inicial cai só em *.workers.dev para validação.
+  // O domínio de produção é anexado num passo separado e explícito —
+  // é ele que corta o WordPress do ar. Ver DEPLOY.md, Passo 5.
+  "workers_dev": true,
+
+  "observability": {
+    "enabled": true
+  }
+}

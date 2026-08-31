@@ -1,314 +1,237 @@
-# Deploy — Vercel + Squarespace DNS + Google Workspace
+# Deploy — Cloudflare Workers + Registro.br/Cloudflare DNS
 
-Guia passo a passo para publicar o site em `julianamaianutriaplv.com`.
+Guia para publicar o site em `julianamaianutriaplv.com.br`, **substituindo o
+WordPress que está hoje na Hostinger**, e apontar `julianamaianutriaplv.com`
+para lá.
 
-**Stack envolvida:**
-- Código: repositório Git (GitHub recomendado)
-- Host: Vercel
-- Registro/DNS: Squarespace (era GoDaddy, foi migrado)
-- E-mail: Google Workspace no mesmo domínio (precisa preservar MX records)
+## Estado atual (verificado em 31/08/2026)
 
-**Pontos críticos antes de começar:**
-- O site atual `.com.br` continua no ar em paralelo (domínio diferente — `.com` vs `.com.br`)
-- **NÃO mexer nos MX records do Workspace** — se quebrar, o e-mail da Juliana para de funcionar
-- TTL baixo (300s) durante a transição para poder reverter se der problema
+| | `julianamaianutriaplv.com.br` | `julianamaianutriaplv.com` |
+|---|---|---|
+| Registro | Registro.br — titular Leonardo Tabari, expira 07/02/2029 | Squarespace Domains II, expira 23/04/2027 |
+| Nameservers | Cloudflare (`theo`/`zara.ns.cloudflare.com`) | `ns-cloud-e1..e4.googledomains.com` |
+| Status | ativo, no ar | **`clientHold`** — fora da zona, não resolve nada |
+| Site | WordPress + Elementor na Hostinger, atrás do proxy Cloudflare | nenhum |
+| E-mail | Hostinger (`mx1`/`mx2.hostinger.com.br`) | nenhum (sem MX) |
+
+Duas coisas que **não** batem com a documentação antiga do projeto: o DNS não
+está na Squarespace (está na Cloudflare) e não há Google Workspace em lugar
+nenhum. O e-mail é Hostinger, no `.com.br`.
+
+## Stack de deploy
+
+- Código: [github.com/julianamaianutriaplv/site](https://github.com/julianamaianutriaplv/site)
+- Build: Next.js em `output: "export"` → HTML estático em `out/`
+- Host: **Cloudflare Workers** com Static Assets
+- Dinâmico: só `/api/lead`, no `worker/index.ts`
+- DNS: Cloudflare (zona já existente)
 
 ---
 
-## Passo 1 — Subir o projeto no GitHub
+## ⚠️ Três coisas que não podem quebrar
 
-No terminal, dentro da pasta do projeto:
+1. **Os MX da Hostinger no `.com.br`.** É o e-mail da Juliana. Nenhum passo
+   deste guia toca em MX — se você se pegar editando um, parou.
+2. **O plano da Hostinger.** Mesmo depois de o WordPress sair do ar, é a
+   Hostinger que entrega o e-mail. Cancelar o plano derruba a caixa.
+3. **A ordem.** O domínio de produção só é anexado no Passo 5. Até lá, tudo
+   roda em `*.workers.dev` e o WordPress continua servindo normalmente.
+
+---
+
+## Passo 1 — Autenticar na Cloudflare
+
+Precisa ser feito por quem tem acesso à conta Cloudflare onde a zona
+`julianamaianutriaplv.com.br` está hospedada.
 
 ```bash
-cd "/Users/leonardotabari/Documents/Claude/Projects/Pagina Juliana"
-
-# 1. Inicializa git
-git init
-git add .
-git commit -m "Initial commit: site Juliana Maia Nutri APLV"
-
-# 2. Cria o repo no GitHub (via navegador OU via CLI gh)
-#    Se tiver gh CLI:
-gh repo create juliana-maia-nutri-aplv --private --source=. --push
-
-#    Se não, criar em github.com/new, depois:
-git remote add origin git@github.com:SEU-USUARIO/juliana-maia-nutri-aplv.git
-git branch -M main
-git push -u origin main
+npx wrangler login
 ```
 
-**Recomendado: repositório privado.** O código pode ser público no futuro, mas no primeiro push é melhor manter privado enquanto você revisa.
+Abre o navegador para autorizar. Confirme que caiu na conta certa:
+
+```bash
+npx wrangler whoami
+```
+
+Em CI, no lugar do login use um API token com as permissões
+`Workers Scripts:Edit`, `Workers Routes:Edit` e `Zone:DNS:Edit`, exportado como
+`CLOUDFLARE_API_TOKEN`.
 
 ---
 
-## Passo 2 — Importar o repo na Vercel
+## Passo 2 — Build e teste local no runtime real
 
-1. Entre em [vercel.com](https://vercel.com) com a conta da Juliana (ou a sua, se for gerenciar)
-2. Clique em **Add New → Project**
-3. Selecione o repositório recém-criado
-4. Configurações que a Vercel detecta automaticamente:
-   - Framework Preset: **Next.js** ✓
-   - Build Command: `next build` ✓
-   - Output Directory: `.next` ✓
-   - Install Command: `npm install` ✓
+```bash
+npm install
+npm run preview
+```
 
-Não mude nada disso. Apenas confirme.
+`preview` roda `next build` e sobe o `workerd` local em
+`http://localhost:8788` — o mesmo runtime da produção, com os assets, os
+redirects e o Worker. Vale conferir:
+
+- [ ] as 10 páginas + um artigo do blog abrem em 200
+- [ ] `/quem-sou/` devolve **301** para `/sobre`
+- [ ] `/listavip/` devolve **404**
+- [ ] `/sitemap.xml`, `/robots.txt`, `/favicon.ico`, `/og-default.png` abrem
+- [ ] `POST /api/lead` sem `consent` devolve 400
 
 ---
 
-## Passo 3 — Configurar variáveis de ambiente no Vercel
+## Passo 3 — Variáveis de ambiente
 
-Ainda na tela de criação do projeto, antes de deployar, vá em **Environment Variables** e adicione:
+São de duas naturezas diferentes, e confundir as duas é o erro clássico aqui.
 
-### Variáveis obrigatórias para o primeiro deploy
+### Build-time (`NEXT_PUBLIC_*`) — ficam gravadas no HTML
 
-| Name | Value |
+Precisam estar no ambiente **no momento do `npm run build`**. Local: arquivo
+`.env.local`. Em CI: secrets do GitHub Actions.
+
+| Variável | Valor |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://julianamaianutriaplv.com` |
+| `NEXT_PUBLIC_SITE_URL` | `https://julianamaianutriaplv.com.br` |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | `5531999191083` |
 | `NEXT_PUBLIC_WHATSAPP_SUPPORT` | `5531999191083` |
-
-### Variáveis opcionais (pode adicionar agora em branco, ativar depois)
-
-| Name | Value inicial |
-|---|---|
-| `NEXT_PUBLIC_GA_ID` | (vazio, ou o ID quando tiver) |
+| `NEXT_PUBLIC_GA_ID` | (o `G-…` quando existir) |
 | `NEXT_PUBLIC_BOOKING_URL` | (vazio) |
-| `NEXT_PUBLIC_HERO_IMAGE` | (vazio — usa placeholder) |
-| `NEXT_PUBLIC_PROFILE_IMAGE` | (vazio — usa placeholder) |
-| `LEAD_PROVIDER` | `none` (desliga captura até decidir provider) |
 
-Clique em **Deploy**. Em ~2 minutos, o primeiro deploy termina. Vai aparecer uma URL tipo `juliana-maia-nutri-aplv.vercel.app`.
+### Runtime do Worker — só o `/api/lead` usa
 
-**Acesse essa URL. Valide que o site abre, que as páginas carregam, que não há erro 500.** Se tiver erro, ver na aba *Logs* no painel do projeto.
+Não secretas, em `wrangler.jsonc` no bloco `vars`:
 
----
-
-## Passo 4 — Adicionar o domínio custom no Vercel
-
-No painel do projeto:
-
-1. Vá em **Settings → Domains**
-2. Digite `julianamaianutriaplv.com` e clique em **Add**
-3. A Vercel vai mostrar instruções DNS. **Siga as da Vercel, não as deste guia** se houver qualquer divergência — a Vercel é a fonte da verdade.
-
-Em geral, para domínio apex você verá:
-
-> Set the following record on your DNS provider to continue:
->
-> Type: A
-> Name: @
-> Value: 76.76.21.21
-
-E ela também vai sugerir adicionar `www.julianamaianutriaplv.com` como redirect para o apex. Aceite.
-
-**Mantenha essa tela aberta. Você vai configurar o DNS no Squarespace no próximo passo e voltar aqui para verificar.**
-
----
-
-## Passo 5 — Configurar DNS no Squarespace
-
-### 5.1. Acessar o painel DNS
-
-1. Entre em [squarespace.com/domains](https://account.squarespace.com/domains)
-2. Clique no domínio `julianamaianutriaplv.com`
-3. Vá na aba **DNS Settings** (ou "Configurações avançadas")
-
-### 5.2. ⚠️ IMPORTANTE: anotar MX records do Google Workspace ANTES de mexer
-
-Antes de adicionar/remover qualquer coisa, **fotografe ou copie** os MX records existentes. Eles são essenciais para o e-mail do Google Workspace funcionar. Vão estar assim:
-
-```
-Type: MX    Host: @    Priority: 1   Value: smtp.google.com
+```jsonc
+"vars": { "LEAD_PROVIDER": "none" }
 ```
 
-(ou, em configurações antigas, múltiplos ASPMX: `aspmx.l.google.com`, `alt1.aspmx.l.google.com` etc.)
-
-**NÃO APAGUE esses MX records em hipótese alguma.** Se apagar, o e-mail @julianamaianutriaplv.com para de funcionar.
-
-### 5.3. Adicionar os records da Vercel
-
-Na mesma tela, adicione (ou edite, se já existir) os seguintes registros:
-
-#### A record para o apex (domínio principal)
-
-| Tipo | Host | Valor | TTL |
-|---|---|---|---|
-| A | `@` | `76.76.21.21` | 300 |
-
-Se já houver um A record em `@` apontando para outro IP (do Squarespace Sites, por exemplo), **substitua** o valor pelo IP da Vercel. É essa mudança que "transfere" o site.
-
-#### CNAME para o www
-
-| Tipo | Host | Valor | TTL |
-|---|---|---|---|
-| CNAME | `www` | `cname.vercel-dns.com` | 300 |
-
-Isso faz `www.julianamaianutriaplv.com` resolver para a Vercel, que vai redirecionar automaticamente para o apex.
-
-### 5.4. Verificar que os MX do Workspace continuam intactos
-
-Depois de salvar, role a lista de DNS e confirme que os MX do Google ainda estão lá, sem alteração.
-
-### 5.5. TTL baixo
-
-Use TTL de 300 segundos (5 minutos) durante a transição. Facilita reversão se der problema. Depois de 1–2 semanas estável, pode subir para 3600 (1h) ou até 86400 (24h).
-
----
-
-## Passo 6 — Aguardar propagação DNS e verificar no Vercel
-
-A propagação DNS para `A` e `CNAME` é geralmente rápida com Squarespace — leva de 5 minutos a 2 horas.
-
-Para testar antes de esperar:
+Secretas, nunca no repositório:
 
 ```bash
-dig julianamaianutriaplv.com +short
-# deve retornar: 76.76.21.21
-
-dig www.julianamaianutriaplv.com +short
-# deve retornar: cname.vercel-dns.com.  (e depois o IP da Vercel)
+npx wrangler secret put BREVO_API_KEY
+npx wrangler secret put BREVO_LIST_ID
 ```
 
-Volte ao painel da Vercel em **Settings → Domains**. Quando o DNS estiver correto, aparece um check verde ao lado do domínio. Até lá, fica com um ícone de alerta amarelo. Isso é normal.
-
-Assim que ficar verde:
-- A Vercel emite certificado SSL automático (Let's Encrypt). Leva de 10s a 2min.
-- A partir daí, `https://julianamaianutriaplv.com` deve abrir o site.
+Para testar secrets localmente, crie um `.dev.vars` (já está no `.gitignore`)
+no formato `CHAVE=valor`.
 
 ---
 
-## Passo 7 — Validar o deploy
+## Passo 4 — Primeiro deploy (ainda sem tocar no domínio)
 
-Checklist de verificação pós-deploy:
+```bash
+npm run deploy
+```
 
-### Páginas principais abrem
-- [ ] `/`
-- [ ] `/sobre`
-- [ ] `/aplv`
-- [ ] `/consultas`
-- [ ] `/perguntas-frequentes`
-- [ ] `/blog` e pelo menos 3 artigos individuais
-- [ ] `/materiais`
-- [ ] `/contato`
-- [ ] `/privacidade`
-- [ ] `/termos`
-
-### Funcional
-- [ ] Menu mobile abre e fecha
-- [ ] Botão WhatsApp flutuante funciona (abre conversa)
-- [ ] Links de "Agendar consulta" levam ao WhatsApp
-- [ ] Accordion das FAQs expande/recolhe
-- [ ] Cookie banner aparece na primeira visita
-- [ ] 404 (`/pagina-que-nao-existe`) renderiza a página de erro
-
-### SEO
-- [ ] `https://julianamaianutriaplv.com/sitemap.xml` abre e lista todas as páginas
-- [ ] `https://julianamaianutriaplv.com/robots.txt` abre e aponta para sitemap
-- [ ] Source de `/` (ver código-fonte do navegador) contém `<script type="application/ld+json">` com `MedicalBusiness`
-- [ ] Source de `/perguntas-frequentes` contém JSON-LD com `FAQPage`
-- [ ] Source de `/blog/[qualquer]` contém JSON-LD com `Article` e `BreadcrumbList`
-- [ ] Redes sociais: testar compartilhamento em [opengraph.xyz](https://www.opengraph.xyz/) com URL do site (OG image ainda vai aparecer com fallback sem foto, é esperado)
-
-### Performance
-- [ ] Abrir [pagespeed.web.dev](https://pagespeed.web.dev) e rodar teste na URL
-  - Meta: 90+ em Performance, 100 em Accessibility, 100 em Best Practices, 100 em SEO
-  - Se algo vier abaixo, mandar aqui para eu ajustar
-
-### E-mail do Workspace continua funcionando
-- [ ] Enviar e-mail de teste para o contato do domínio
-- [ ] Receber no Workspace
+Sai uma URL `https://julianamaianutriaplv.<sua-conta>.workers.dev`.
+**Rode o checklist do Passo 2 contra ela.** O WordPress continua intacto —
+nada em produção mudou ainda.
 
 ---
 
-## Passo 8 — Google Search Console
+## Passo 5 — A virada: anexar o domínio de produção
 
-Depois de validado tudo acima:
+É este passo que tira o WordPress do ar. Faça com a Juliana avisada.
 
-1. Entre em [search.google.com/search-console](https://search.google.com/search-console)
-2. Add property → digite `julianamaianutriaplv.com`
-3. Método de verificação recomendado: **DNS record (TXT)**
-4. A Google vai te dar um TXT record tipo `google-site-verification=abc123...`
-5. Adicione no Squarespace como TXT record (sem apagar o que já existe — adicionar novo)
-6. Confirme no Search Console
-7. Quando verificar, entre em **Sitemaps** e submeta: `https://julianamaianutriaplv.com/sitemap.xml`
+1. Cloudflare Dashboard → **Workers & Pages** → projeto `julianamaianutriaplv`
+2. **Settings → Domains & Routes → Add → Custom domain**
+3. Adicione `julianamaianutriaplv.com.br`
+4. Adicione também `www.julianamaianutriaplv.com.br`
 
-A partir daí, o Google começa a indexar. Demora de dias a semanas para os artigos aparecerem em buscas.
+A Cloudflare substitui sozinha os registros A do apex e do www que hoje apontam
+para a Hostinger. **Os MX não são tocados** — confira na aba DNS depois de
+salvar que `mx1.hostinger.com.br` e `mx2.hostinger.com.br` continuam lá.
 
----
+O certificado sai em segundos, porque a zona já é Cloudflare.
 
-## Passo 9 — Google Analytics 4 (opcional, mas recomendado)
+### Validação pós-virada
 
-Se a Juliana quer mensurar tráfego:
+```bash
+dig julianamaianutriaplv.com.br +short
+curl -sI https://julianamaianutriaplv.com.br | head -3
+curl -sI https://julianamaianutriaplv.com.br/quem-sou/ | grep -i "^location"   # -> /sobre
+curl -s https://julianamaianutriaplv.com.br/robots.txt
+```
 
-1. [analytics.google.com](https://analytics.google.com) → Admin → Create Property
-2. Nome: "Juliana Maia Nutri APLV"
-3. Seleciona "Web" como stream
-4. URL: `https://julianamaianutriaplv.com`
-5. Copia o **Measurement ID** (começa com `G-`)
-6. No painel da Vercel, **Settings → Environment Variables**, editar `NEXT_PUBLIC_GA_ID` com o valor
-7. Trigger um novo deploy (aba Deployments → menu ... → **Redeploy**)
-8. Após o redeploy, GA4 começa a coletar
+E mande um e-mail de teste para a caixa da Juliana, para confirmar que o
+Hostinger continua entregando.
 
 ---
 
-## Passo 10 — Ativar captura de e-mail quando decidir provider
+## Passo 6 — Destravar o `.com` e redirecionar para o `.com.br`
 
-Quando a Juliana escolher entre Brevo, Mailchimp ou Resend:
+O `.com` está em `clientHold`: o registry o removeu da zona, e por isso ele não
+resolve **nada** hoje. Isso quase sempre é a verificação ICANN do e-mail do
+titular que nunca foi concluída (ou uma pendência de cobrança).
 
-1. Criar conta na ferramenta escolhida
-2. Pegar chave de API (e list ID quando aplicável)
-3. Na Vercel, **Settings → Environment Variables**, adicionar as chaves correspondentes (ver `.env.example` ou `README.md`)
-4. Trocar `LEAD_PROVIDER=none` para o nome do provider
-5. Redeploy
-6. Testar em `/materiais` com um e-mail real
+1. Entrar em [account.squarespace.com/domains](https://account.squarespace.com/domains)
+2. Resolver o que estiver pendente — em geral é reenviar e clicar no e-mail de
+   verificação do registrante
+3. Confirmar que o `clientHold` saiu:
+   ```bash
+   whois julianamaianutriaplv.com | grep -i "domain status"
+   ```
+
+Com o domínio liberado:
+
+4. Cloudflare → **Add a domain** → `julianamaianutriaplv.com`
+5. Na Squarespace, trocar os nameservers de `ns-cloud-e*.googledomains.com`
+   para os dois que a Cloudflare indicar
+6. Na zona nova, criar um registro **A** `@` → `192.0.2.1` **proxied** (laranja),
+   e um **CNAME** `www` → `julianamaianutriaplv.com` **proxied**. O IP é um
+   placeholder reservado (RFC 5737) — quem responde é a regra de redirect,
+   o IP nunca é acessado.
+7. **Rules → Redirect Rules → Create rule**
+   - Nome: `.com -> .com.br`
+   - Se: `Hostname` `contains` `julianamaianutriaplv.com`
+   - Então: **Dynamic redirect**, status **301**, preserve query string
+   - Expressão: `concat("https://julianamaianutriaplv.com.br", http.request.uri.path)`
+
+```bash
+curl -sI https://julianamaianutriaplv.com/aplv | grep -iE "^(HTTP|location)"
+# HTTP/2 301 · location: https://julianamaianutriaplv.com.br/aplv
+```
 
 ---
 
-## Resumo dos DNS records finais em `julianamaianutriaplv.com`
+## Passo 7 — Search Console
 
-Quando tudo estiver pronto, você terá no Squarespace DNS:
+Faça **depois** da virada, não antes.
 
-| Tipo | Host | Valor | Função |
-|---|---|---|---|
-| A | @ | 76.76.21.21 | Site na Vercel |
-| CNAME | www | cname.vercel-dns.com | www → apex |
-| MX | @ | (os originais do Google Workspace) | E-mail |
-| TXT | @ | `google-site-verification=...` | Search Console |
-| TXT | @ | `v=spf1 include:_spf.google.com ~all` | SPF (Workspace) |
-| CNAME ou TXT | google._domainkey ou similar | (DKIM do Workspace) | Autenticação e-mail |
+1. [search.google.com/search-console](https://search.google.com/search-console)
+2. Add property → `julianamaianutriaplv.com.br` (tipo **Domain**)
+3. Verificação por TXT — adicionar na zona Cloudflare **sem apagar** o TXT de
+   SPF que já existe
+4. **Sitemaps** → submeter `https://julianamaianutriaplv.com.br/sitemap.xml`
+5. **Removals → nada.** Deixe os 404 do funil antigo saírem sozinhos.
 
-**Os records do Workspace já existem e devem ser preservados.** A única coisa nova que você está adicionando é o A record apontando para a Vercel e o CNAME do www.
+Nas semanas seguintes, acompanhar em **Páginas** se os 301 estão sendo
+processados e se algum 404 tem tráfego relevante — se tiver, vira uma linha
+nova em `public/_redirects`.
 
 ---
 
 ## Reversão de emergência
 
-Se alguma coisa der errado em produção e você precisar voltar ao estado anterior rapidamente:
+O WordPress na Hostinger não é apagado por nenhum passo deste guia; ele só deixa
+de receber tráfego. Para voltar:
 
-### Voltar para Squarespace Sites (caso o domínio antes estivesse lá)
-- Mudar o A record de `@` de `76.76.21.21` de volta para o IP original do Squarespace (você anotou, certo?)
+1. Cloudflare → Workers & Pages → projeto → **Domains & Routes** → remover
+   `julianamaianutriaplv.com.br` e `www`
+2. Cloudflare → **DNS** → recriar os A do apex e do www apontando para o IP de
+   origem da Hostinger (anote esse IP no hPanel **antes** da virada), proxied
+3. Propaga em segundos, porque o TTL é gerenciado pela Cloudflare
 
-### Só tirar do ar (sem voltar pra lugar nenhum)
-- No Vercel: **Settings → Domains → julianamaianutriaplv.com → Remove**
-- O site volta a acessar pela URL temporária `juliana-maia-nutri-aplv.vercel.app` enquanto você resolve
-
-### Se e-mail parar de funcionar
-- Volta imediatamente para os MX records originais do Workspace
-- Testa envio/recebimento
-- Só depois volta a mexer em qualquer outra coisa
+Se o e-mail parar: confira os MX primeiro. Eles não deviam ter mudado.
 
 ---
 
-## Fluxo resumido para referência
+## Fluxo resumido
 
 ```
-GitHub → Vercel (deploy) → Vercel emite certificado SSL
-       → DNS Squarespace (A + CNAME apontando para Vercel)
-       → Site publicado em julianamaianutriaplv.com
-       → Search Console (submissão de sitemap)
-       → GA4 (métricas)
-       → Captura de e-mail (provider)
+GitHub → npm run build (out/) → wrangler deploy → *.workers.dev  [validação]
+       → anexa julianamaianutriaplv.com.br como Custom Domain     [a virada]
+       → destrava .com na Squarespace → zona Cloudflare → 301 p/ .com.br
+       → Search Console + sitemap
 ```
 
-Última atualização: 2026-04-23
+Última atualização: 2026-08-31
