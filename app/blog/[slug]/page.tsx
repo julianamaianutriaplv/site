@@ -23,7 +23,7 @@ export function generateMetadata({ params }: Props) {
   if (!post) return {};
 
   return buildMetadata({
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     path: `/blog/${post.slug}`,
     type: "article",
@@ -39,7 +39,7 @@ export default function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const jsonLd = articleJsonLd({
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     slug: post.slug,
     datePublished: post.publishedAt,

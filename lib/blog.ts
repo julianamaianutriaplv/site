@@ -6,6 +6,12 @@ import readingTime from "reading-time";
 export interface BlogPostMeta {
   slug: string;
   title: string;
+  /**
+   * Título só para a tag <title>, quando o título de leitura passa dos ~60
+   * caracteres que o Google mostra. O leitor continua vendo o título longo
+   * no H1 e na listagem; quem encurta é a busca.
+   */
+  seoTitle?: string;
   description: string;
   category: string;
   author: string;
@@ -58,6 +64,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
   return {
     slug,
     title: String(data.title ?? ""),
+    seoTitle: data.seoTitle ? String(data.seoTitle) : undefined,
     description: String(data.description ?? ""),
     category: String(data.category ?? "APLV"),
     author: String(data.author ?? "Juliana Maia"),
