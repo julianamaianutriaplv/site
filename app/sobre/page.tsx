@@ -15,7 +15,7 @@ import { siteConfig, whatsappLink } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Sobre Juliana Maia",
   description:
-    "Juliana Fernandes Maia é nutricionista clínica especialista em alergia alimentar (CRN-9 22006), mãe do João Artur, criança diagnosticada com APLV aos 12 dias de vida.",
+    "Juliana Fernandes Maia, nutricionista clínica com 20 anos de experiência e 10 dedicados a alergia alimentar. Mãe de alérgico, por acaso.",
   path: "/sobre",
 });
 
