@@ -16,10 +16,31 @@
     "not_found_handling": "none"
   },
 
-  // Deploy inicial cai só em *.workers.dev para validação.
-  // O domínio de produção é anexado num passo separado e explícito —
-  // é ele que corta o WordPress do ar. Ver DEPLOY.md, Passo 5.
+  // Mantido para validação e rollback rápido.
   "workers_dev": true,
+
+  // Produção. Deliberadamente ROTAS, não custom_domain.
+  //
+  // custom_domain exige apagar os registros A do apex e do www (a API recusa
+  // com o código 100117 enquanto existirem) e abre uma janela de site fora do
+  // ar entre a exclusão e a criação. A rota intercepta na borda com o DNS
+  // intacto: nenhum registro é alterado, então MX, SPF e CAA ficam a salvo
+  // por construção, e a virada não tem downtime.
+  //
+  // Depende do apex estar proxiado (nuvem laranja) — está.
+  // ROLLBACK: remover este bloco e reimplantar. O tráfego volta na hora para
+  // a origem Hostinger (89.117.6.105), sem esperar propagação de DNS.
+  // Snapshot do DNS anterior: _private/dns-snapshot-pre-virada.txt
+  "routes": [
+    {
+      "pattern": "julianamaianutriaplv.com.br/*",
+      "zone_name": "julianamaianutriaplv.com.br"
+    },
+    {
+      "pattern": "www.julianamaianutriaplv.com.br/*",
+      "zone_name": "julianamaianutriaplv.com.br"
+    }
+  ],
 
   "observability": {
     "enabled": true
