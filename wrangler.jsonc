@@ -16,8 +16,11 @@
     "not_found_handling": "none"
   },
 
-  // Mantido para validação e rollback rápido.
-  "workers_dev": true,
+  // Desligado depois da virada. A URL *.workers.dev servia o site inteiro
+  // com robots "Allow: /" e sem X-Robots-Tag, ou seja: era conteúdo duplicado
+  // indexável. A canonical apontava para o .com.br e mitigava, mas o certo é
+  // a cópia não existir. Para validar antes de publicar, use `npm run preview`.
+  "workers_dev": false,
 
   // Produção. Deliberadamente ROTAS, não custom_domain.
   //

@@ -13,6 +13,7 @@ export default function TermosPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Termos"
         title="Termos de uso"
         description="Regras para o uso deste site e dos conteúdos publicados."

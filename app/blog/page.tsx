@@ -20,6 +20,7 @@ export default function BlogIndexPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Blog"
         title="Conteúdo clínico, em linguagem clara"
         description="Artigos baseados em diretrizes oficiais (ASBAI/SBP/Consenso Brasileiro). Zero mimimi, zero promessa de cura — só informação útil para quem vive a APLV."

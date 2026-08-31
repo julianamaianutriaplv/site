@@ -50,6 +50,7 @@ export default function MateriaisPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Materiais gratuitos"
         title="Ebooks de receitas sem leite"
         description="Desenvolvidos pela Juliana para famílias APLV. Download direto, sem cadastro."

@@ -14,6 +14,7 @@ export default function PrivacidadePage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="LGPD"
         title="Política de privacidade"
         description="Este documento explica quais dados coletamos, por que coletamos, como armazenamos e quais são seus direitos. Em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018)."

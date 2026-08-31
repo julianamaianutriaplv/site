@@ -75,6 +75,7 @@ export default function ConsultasPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Consultas"
         title="Acompanhamento nutricional APLV 100% online"
         description="Atendimento por videochamada (Google Meet), em pacotes estruturados. O plano é individual, baseado em avaliação clínica criteriosa."

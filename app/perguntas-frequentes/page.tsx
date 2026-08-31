@@ -44,6 +44,7 @@ export default function FaqPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Perguntas frequentes"
         title="Dúvidas comuns sobre APLV, respondidas com clareza"
         description="As respostas aqui são educativas, baseadas em diretrizes oficiais (ASBAI/SBP, Consenso Brasileiro, PCDT CONITEC). Não substituem consulta individualizada."

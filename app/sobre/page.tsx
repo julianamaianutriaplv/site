@@ -23,6 +23,7 @@ export default function SobrePage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Quem é"
         title="Juliana Maia"
         description={siteConfig.tagline}

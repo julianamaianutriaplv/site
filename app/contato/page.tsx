@@ -23,6 +23,7 @@ export default function ContatoPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Contato"
         title="Vamos conversar"
         description="A forma mais rápida de falar com a Juliana e a equipe é pelo WhatsApp. Também estamos nas redes sociais."
