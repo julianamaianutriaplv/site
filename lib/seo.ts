@@ -28,14 +28,14 @@ export function buildMetadata(options: SeoOptions = {}): Metadata {
 
   // O Google corta o título por volta de 60 caracteres. Vários artigos já
   // chegam nesse limite sozinhos, e grudar o nome do site atrás só garante
-  // que a marca — a parte descartável — seja o que some. Acima de 46, o
-  // título vai puro.
-  const SUFIXO = "Juliana Maia";
+  // que a marca — a parte descartável — seja o que some. O sufixo tem 17
+  // caracteres com o "Dra."; acima de 41 o título vai puro.
+  const SUFIXO = "Dra. Juliana Maia";
   const fullTitle = title
-    ? title.length > 46
+    ? title.length > 41 || title.includes(SUFIXO)
       ? title
       : `${title} | ${SUFIXO}`
-    : `${siteConfig.shortName} — Nutricionista especialista em APLV`;
+    : `${siteConfig.shortName} — Nutricionista expert em APLV`;
 
   const url = absoluteUrl(path);
   const imageUrl = image.startsWith("http") ? image : absoluteUrl(image);

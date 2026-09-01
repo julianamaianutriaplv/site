@@ -4,8 +4,8 @@
  */
 
 export const siteConfig = {
-  name: "Juliana Maia — Nutri APLV",
-  shortName: "Juliana Maia Nutri APLV",
+  name: "Dra. Juliana Maia — Nutri APLV",
+  shortName: "Dra. Juliana Maia Nutri APLV",
   tagline: "Nutricionista por escolha, mãe de alérgico alimentar pelo destino.",
   description:
     "Referência em alergia à proteína do leite de vaca (APLV) infantil. Conteúdo clínico acolhedor, acompanhamento nutricional e orientação para mães em jornada APLV.",
@@ -16,7 +16,7 @@ export const siteConfig = {
 
   // Credenciais públicas (extraídas do site atual da Juliana)
   professional: {
-    fullName: "Juliana Fernandes Maia",
+    fullName: "Dra. Juliana Fernandes Maia",
     crn: "CRN-9 22006",
     crnState: "MG",
     cnpj: "33.572.240/0001-10",
@@ -44,7 +44,7 @@ export const siteConfig = {
   booking: {
     url: process.env.NEXT_PUBLIC_BOOKING_URL ?? "",
     fallbackWhatsAppMessage:
-      "Olá! Gostaria de mais informações sobre as consultas com a Juliana.",
+      "Olá! Gostaria de mais informações sobre as consultas com a Dra. Juliana.",
   },
 
   // SEO / Analytics

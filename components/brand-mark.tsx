@@ -33,7 +33,7 @@ export function BrandMark({ variant = "full", className }: BrandMarkProps) {
     <span className={cn("inline-flex items-center", className)}>
       <Image
         src="/logo.jpg"
-        alt="Juliana Maia Nutri APLV"
+        alt="Dra. Juliana Maia Nutri APLV"
         width={540}
         height={280}
         priority

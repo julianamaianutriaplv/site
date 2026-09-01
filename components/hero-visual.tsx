@@ -39,7 +39,7 @@ export function HeroVisual({
         {src ? (
           <Image
             src={src}
-            alt="Juliana Maia — nutricionista clínica especialista em APLV"
+            alt="Dra. Juliana Maia — nutricionista clínica expert em APLV"
             fill
             sizes="(max-width: 768px) 100vw, 480px"
             className="object-cover object-top"
@@ -56,9 +56,9 @@ export function HeroVisual({
           20 anos
         </div>
         <div className="font-serif text-sm text-primary leading-tight">
-          de nutrição clínica dedicada
+          como nutricionista clínica e há 10
           <br />
-          a famílias APLV
+          expert em alergia alimentar
         </div>
       </div>
     </div>

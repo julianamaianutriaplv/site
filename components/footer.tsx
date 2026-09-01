@@ -18,7 +18,7 @@ export function Footer() {
             </p>
             <p className="mt-4 text-xs text-white/45">
               {siteConfig.professional.fullName} · {siteConfig.professional.crn} ·
-              Nutricionista Clínica especialista em APLV
+              Nutricionista Clínica expert em APLV
             </p>
           </div>
 
@@ -72,7 +72,7 @@ export function Footer() {
                   href="/materiais"
                   className="text-white/75 hover:text-sage"
                 >
-                  Materiais gratuitos
+                  Materiais
                 </Link>
               </li>
             </ul>

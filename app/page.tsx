@@ -23,8 +23,8 @@ const PACOTES = [
     nome: "Pacote básico",
     destaque: false,
     itens: [
-      { t: "1 consulta + 1 retorno depois de 20 dias, por vídeo", ok: true },
-      { t: "Sem acompanhamento por WhatsApp entre as consultas", ok: false },
+      { t: "1 consulta + 1 retorno em até 20 dias", ok: true },
+      { t: "Acompanhamento via WhatsApp por 20 dias", ok: true },
       { t: "Prescrição de suplementação para mãe e criança, quando necessário", ok: true },
       { t: "Orientação minuciosa da dieta de substituição", ok: true },
       { t: "Lista de marcas seguras atualizada", ok: true },
@@ -37,13 +37,13 @@ const MATERIAIS = [
     titulo: "25 receitas doces",
     capa: "/materiais/capa-doces.jpg",
     texto:
-      "Sobremesas sem leite, sem ovo e sem glúten — para o seu filho e para você, que também está em dieta de exclusão.",
+      "Sobremesas e doces para APLV, alérgicos a ovo e glúten — para o seu filho e para você, que também está em dieta de exclusão.",
   },
   {
     titulo: "25 receitas de lanches",
     capa: "/materiais/capa-lanches.jpg",
     texto:
-      "Tortas, salgados e pizzas sem leite, sem soja, sem ovo e sem glúten, fáceis de fazer em qualquer hora do dia.",
+      "Tortas, salgados e pizzas para APLV, alérgicos a ovo e glúten, fáceis de fazer em qualquer hora do dia.",
   },
 ];
 
@@ -66,7 +66,7 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 max-w-xl text-lg text-muted-foreground text-pretty">
-              Sou a Juliana Maia. Descobri a APLV do meu filho aos 12 dias de
+              Sou a Dra. Juliana Maia. Descobri a APLV do meu filho aos 12 dias de
               vida e saí do consultório com uma folha cheia de nomes e nenhuma
               ideia do que fazer. Hoje ajudo mães e cuidadores a estabilizar os
               sintomas com um caminho claro — de mãe de alérgico para mãe de
@@ -85,7 +85,7 @@ export default function HomePage() {
             </div>
 
             <p className="mt-10 flex items-baseline gap-3 border-t border-border pt-6">
-              <b className="font-serif text-3xl text-secondary-strong">7.000+</b>
+              <b className="font-serif text-3xl text-secondary-strong">+8.000</b>
               <span className="text-muted-foreground">
                 famílias atendidas no Brasil e no exterior, com os sintomas
                 estabilizados.
@@ -97,9 +97,9 @@ export default function HomePage() {
             <div className="arco overflow-hidden bg-surface-pessego">
               <Image
                 src="/juliana-hero.jpg"
-                alt="Juliana Maia, nutricionista especialista em APLV"
-                width={1082}
-                height={1600}
+                alt="Dra. Juliana Maia, nutricionista expert em APLV"
+                width={851}
+                height={1280}
                 priority
                 className="h-full w-full object-cover"
               />
@@ -119,7 +119,7 @@ export default function HomePage() {
               que eu tinha que ler todos os rótulos.”
             </blockquote>
             <p className="mt-3 text-sm text-subtle">
-              Juliana, sobre a consulta em que descobriu a APLV do João Artur.
+              Dra. Juliana, sobre a consulta em que descobriu a APLV do João Artur.
             </p>
 
             <p className="mt-6 text-muted-foreground">
@@ -159,9 +159,9 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-xl">
               <Image
                 src="/juliana-retrato.jpg"
-                alt="Juliana Maia"
-                width={1070}
-                height={1600}
+                alt="Dra. Juliana Maia"
+                width={931}
+                height={1280}
                 className="h-full w-full object-cover"
               />
             </div>
@@ -193,7 +193,7 @@ export default function HomePage() {
             </div>
 
             <p className="mt-6 font-serif text-2xl italic text-terra">
-              Juliana Maia
+              Dra. Juliana Maia
             </p>
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-subtle">
               Nutricionista clínica · {siteConfig.professional.crn}
