@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Política de privacidade",
   description:
-    "Política de privacidade do site Juliana Maia Nutri APLV, em conformidade com a LGPD (Lei 13.709/2018).",
+    "Política de privacidade do site da Dra. Juliana Maia Nutri APLV, em conformidade com a LGPD (Lei 13.709/2018).",
   path: "/privacidade",
   noIndex: false,
 });
@@ -14,6 +14,7 @@ export default function PrivacidadePage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="LGPD"
         title="Política de privacidade"
         description="Este documento explica quais dados coletamos, por que coletamos, como armazenamos e quais são seus direitos. Em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018)."
@@ -46,7 +47,7 @@ export default function PrivacidadePage() {
           <p>Coletamos dois tipos de dados:</p>
           <h3>2.1. Dados fornecidos ativamente por você</h3>
           <ul>
-            <li>Nome e e-mail, ao se cadastrar para materiais gratuitos</li>
+            <li>Nome e e-mail, ao se cadastrar para receber materiais</li>
             <li>
               Mensagens e informações enviadas por formulários de contato, se
               aplicáveis
@@ -68,7 +69,7 @@ export default function PrivacidadePage() {
           <h2>3. Por que coletamos</h2>
           <ul>
             <li>
-              Enviar os materiais gratuitos solicitados (legítimo interesse e
+              Enviar os materiais solicitados (legítimo interesse e
               execução de solicitação)
             </li>
             <li>

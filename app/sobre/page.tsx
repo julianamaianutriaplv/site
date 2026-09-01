@@ -13,9 +13,9 @@ import { buildMetadata } from "@/lib/seo";
 import { siteConfig, whatsappLink } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Sobre Juliana Maia",
+  title: "Sobre a Dra. Juliana Maia",
   description:
-    "Juliana Fernandes Maia é nutricionista clínica especialista em alergia alimentar (CRN-9 22006), mãe do João Artur, criança diagnosticada com APLV aos 12 dias de vida.",
+    "Dra. Juliana Fernandes Maia: 20 anos como nutricionista clínica e há 10 expert em alergia alimentar. Mãe de alérgico, por acaso.",
   path: "/sobre",
 });
 
@@ -23,8 +23,9 @@ export default function SobrePage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Quem é"
-        title="Juliana Maia"
+        title="Dra. Juliana Maia"
         description={siteConfig.tagline}
       >
         <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] items-start">
@@ -36,17 +37,17 @@ export default function SobrePage() {
               />
             </div>
             <p>
-              Juliana Fernandes Maia é nutricionista clínica ({siteConfig.professional.crn})
-              com 20 anos de experiência clínica e 10 anos de especialização
-              em alergia alimentar — com foco em APLV (alergia à proteína do
-              leite de vaca) na infância.
+              A Dra. Juliana Fernandes Maia ({siteConfig.professional.crn}) tem
+              20 anos como nutricionista clínica e há 10 é expert em alergia
+              alimentar — com foco em APLV (alergia à proteína do leite de
+              vaca) na infância.
             </p>
             <p>
               A escolha pela especialidade não veio só do consultório. Veio de
               casa. O filho dela, João Artur, foi diagnosticado com APLV aos{" "}
               <strong>12 dias de vida</strong>, com sangue nas fezes, choro
               intenso e sono fragmentado. A busca pela compreensão do
-              tratamento na prática — não apenas da teoria — levou a Juliana a
+              tratamento na prática — não apenas da teoria — levou a Dra. Juliana a
               aprofundar estudos, escutar outras famílias, testar caminhos e
               consolidar um método que funciona na rotina real.
             </p>

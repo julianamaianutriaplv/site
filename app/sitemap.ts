@@ -5,7 +5,6 @@ import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/$/, "");
-  const now = new Date().toISOString();
 
   const staticRoutes = [
     { path: "/", priority: 1.0, freq: "weekly" as const },
@@ -28,9 +27,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   return [
+    // Sem lastModified nas páginas institucionais: o campo é opcional, e
+    // carimbar a data do build em página que não mudou ensina o Google a
+    // ignorar o sinal justamente onde ele importa — nos artigos.
     ...staticRoutes.map((r) => ({
       url: `${base}${r.path}`,
-      lastModified: now,
       changeFrequency: r.freq,
       priority: r.priority,
     })),

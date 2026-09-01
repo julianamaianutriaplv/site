@@ -25,7 +25,7 @@ type PackageItem = {
 export const metadata = buildMetadata({
   title: "Consultas — Acompanhamento nutricional APLV",
   description:
-    "Consultas 100% online por Google Meet com Juliana Maia. Pacotes Completo e Básico, com prescrição nutricional, suplementação e lista de marcas seguras.",
+    "Consultas 100% online por Google Meet com a Dra. Juliana Maia. Pacotes Completo e Básico, com prescrição nutricional, suplementação e lista de marcas seguras.",
   path: "/consultas",
 });
 
@@ -57,11 +57,8 @@ const packages: Array<{
       "Indicado para famílias com plano já em andamento que precisam de ajustes pontuais.",
     items: [
       { text: "1 consulta inicial (videochamada Google Meet)" },
-      { text: "1 consulta de retorno após 20 dias", highlight: true },
-      {
-        text: "Acompanhamento por WhatsApp por 2 meses em dias úteis",
-        included: false,
-      },
+      { text: "1 consulta de retorno em até 20 dias", highlight: true },
+      { text: "Acompanhamento por WhatsApp por 20 dias", highlight: true },
       { text: "Prescrição nutricional individualizada" },
       { text: "Indicação de suplementação quando aplicável" },
       { text: "Lista atualizada de marcas seguras" },
@@ -75,6 +72,7 @@ export default function ConsultasPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Consultas"
         title="Acompanhamento nutricional APLV 100% online"
         description="Atendimento por videochamada (Google Meet), em pacotes estruturados. O plano é individual, baseado em avaliação clínica criteriosa."
@@ -156,7 +154,7 @@ export default function ConsultasPage() {
               </ul>
               <Button
                 asChild
-                variant={pack.featured ? "secondary" : "primary"}
+                variant={pack.featured ? "primary" : "outline"}
                 size="lg"
                 className="w-full sm:w-auto"
               >

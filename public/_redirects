@@ -1,0 +1,93 @@
+# Redirects 301 das URLs do WordPress antigo (Hostinger) para o site novo.
+# Formato Cloudflare Static Assets: <origem> <destino> <status>
+#
+# ATENÇÃO: o WordPress publicava TODA URL com barra final (/quem-sou/).
+# Cada regra existe nas duas formas — sem a versão com barra, a URL que
+# está de fato indexada no Google cai em 404.
+#
+# `_redirects` é avaliado ANTES do html_handling do wrangler.jsonc, então é
+# aqui que se força 301 no lugar do 307 padrão da normalização de barra.
+#
+# URLs de funil descontinuadas não aparecem aqui de propósito: caem em 404,
+# que é o sinal correto para o Google removê-las do índice.
+
+# --- Institucional ---
+/quem-sou/                                                                                   /sobre                   301
+/quem-sou                                                                                    /sobre                   301
+/sobre-aplv/                                                                                 /aplv                    301
+/sobre-aplv                                                                                  /aplv                    301
+/atendimentos/                                                                               /consultas               301
+/atendimentos                                                                                /consultas               301
+/metodo/                                                                                     /consultas               301
+/metodo                                                                                      /consultas               301
+/politica-de-privacidade/                                                                    /privacidade             301
+/politica-de-privacidade                                                                     /privacidade             301
+/termos-de-uso-e-servico/                                                                    /termos                  301
+/termos-de-uso-e-servico                                                                     /termos                  301
+/home/                                                                                       /                        301
+/home                                                                                        /                        301
+/pagina-exemplo/                                                                             /                        301
+/pagina-exemplo                                                                              /                        301
+
+# --- Variações antigas da página de APLV ---
+/aplv-old/                                                                                   /aplv                    301
+/aplv-old                                                                                    /aplv                    301
+/aplv-2023/                                                                                  /aplv                    301
+/aplv-2023                                                                                   /aplv                    301
+/aplv-v1/                                                                                    /aplv                    301
+/aplv-v1                                                                                     /aplv                    301
+/aplv-teste/                                                                                 /aplv                    301
+/aplv-teste                                                                                  /aplv                    301
+/aplv-mec/                                                                                   /aplv                    301
+/aplv-mec                                                                                    /aplv                    301
+/aplv-popup/                                                                                 /aplv                    301
+/aplv-popup                                                                                  /aplv                    301
+/aplv-vsl/                                                                                   /aplv                    301
+/aplv-vsl                                                                                    /aplv                    301
+
+# --- Materiais ---
+/e-book/                                                                                     /materiais               301
+/e-book                                                                                      /materiais               301
+/passo-a-passo-nutricional/                                                                  /materiais               301
+/passo-a-passo-nutricional                                                                   /materiais               301
+
+# --- Prova social ---
+/depoimentos/                                                                                /sobre                   301
+/depoimentos                                                                                 /sobre                   301
+/depoimentos-aplv/                                                                           /sobre                   301
+/depoimentos-aplv                                                                            /sobre                   301
+/depoimentos-venda/                                                                          /sobre                   301
+/depoimentos-venda                                                                           /sobre                   301
+
+# --- Conteúdo ---
+# Os dois artigos abaixo iam para /aplv por falta de equivalente. Agora têm
+# artigo próprio, então apontam para o destino certo — 301 para conteúdo
+# equivalente vale muito mais que 301 para página genérica.
+/diario-de-bordo/                                                                            /blog                    301
+/diario-de-bordo                                                                             /blog                    301
+/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-reacao-do-tipo-fpies/                        /blog/fpies-o-que-e      301
+/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-reacao-do-tipo-fpies                         /blog/fpies-o-que-e      301
+/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-alergia-ige-mediada-nao-mediada-ou-mista/    /blog/tipos-de-reacao-aplv     301
+/aprenda-a-identificar-se-o-seu-filhoa-aplv-tem-alergia-ige-mediada-nao-mediada-ou-mista     /blog/tipos-de-reacao-aplv     301
+/como-saber-se-meu-filhoa-tem-aplv-alergia-ao-leite-de-vaca-ou-a-outros-alimentos-fazendo-o-correto-teste-de-provocacao-oral-tpo-para-fechamento-de-diagnostico-das-alergias-alimentares/ /blog/teste-provocacao-oral-tpo 301
+/como-saber-se-meu-filhoa-tem-aplv-alergia-ao-leite-de-vaca-ou-a-outros-alimentos-fazendo-o-correto-teste-de-provocacao-oral-tpo-para-fechamento-de-diagnostico-das-alergias-alimentares /blog/teste-provocacao-oral-tpo 301
+
+# --- Funil descontinuado, mas com intenção comercial clara ---
+/workshop/                                                                                   /consultas               301
+/workshop                                                                                    /consultas               301
+/imersao-aplv/                                                                               /consultas               301
+/imersao-aplv                                                                                /consultas               301
+/trilha-rapida-aplv/                                                                         /consultas               301
+/trilha-rapida-aplv                                                                          /consultas               301
+
+# --- Barra final das páginas atuais -> canônica (301, não 307) ---
+/sobre/                                                                                      /sobre                   301
+/aplv/                                                                                       /aplv                    301
+/consultas/                                                                                  /consultas               301
+/perguntas-frequentes/                                                                       /perguntas-frequentes    301
+/blog/                                                                                       /blog                    301
+/materiais/                                                                                  /materiais               301
+/contato/                                                                                    /contato                 301
+/privacidade/                                                                                /privacidade             301
+/termos/                                                                                     /termos                  301
+/blog/:slug/                                                                                 /blog/:slug              301

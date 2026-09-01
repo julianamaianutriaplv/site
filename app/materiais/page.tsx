@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Download, Info } from "lucide-react";
+import { Info, ShoppingCart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/section";
@@ -7,9 +7,9 @@ import { buildMetadata } from "@/lib/seo";
 import { whatsappLink } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Materiais gratuitos — APLV",
+  title: "Ebooks de receitas para APLV",
   description:
-    "Ebooks de receitas sem leite para crianças APLV: 25 receitas de lanches + 25 receitas doces. Download gratuito.",
+    "Ebooks de receitas para APLV, alérgicos a ovo e glúten: 25 receitas de lanches + 25 receitas doces. Compra pela Eduzz.",
   path: "/materiais",
 });
 
@@ -18,30 +18,30 @@ const materials = [
     id: "receitas-lanches",
     title: "25 Receitas de Lanches para APLV",
     description:
-      "Ebook com 25 receitas de lanches sem leite — testadas em famílias APLV reais, com foto e passo a passo. Bolos, biscoitos, pão de queijo sem queijo, patês e muito mais para a lancheira da escola e para o dia a dia. Contempla também alérgicos alimentares (ovo e glúten).",
+      "Ebook com 25 receitas de lanches para APLV, alérgicos a ovo e glúten — testadas em famílias reais, com foto e passo a passo. Bolos, biscoitos, pão de queijo sem queijo, patês e muito mais para a lancheira da escola e para o dia a dia.",
     cover: "/materiais/capa-lanches.jpg",
     alt: "Capa do ebook 25 Receitas de Lanches para APLV",
-    downloadUrl:
-      "https://drive.google.com/file/d/1S-CWsUREB-uhr6LsYdwGA5xNSAJrjNeI/view?usp=sharing",
+    // Checkout Eduzz. O pareamento livro↔link veio da dona do site (msg 1788226217).
+    checkoutUrl: "https://sun.eduzz.com/2413000",
     bullets: [
       "25 receitas completas com foto, ingredientes e modo de fazer",
       "Foco em lanche da escola e substitutos do pão/biscoito industrializado",
-      "Alérgicos alimentares (ovo e glúten) contemplados",
+      "Para APLV, alérgicos a ovo e glúten",
     ],
   },
   {
     id: "receitas-doces",
     title: "25 Receitas Doces para APLV",
     description:
-      "Ebook com 25 receitas doces sem leite — brigadeiro, pudim, bolos de chocolate, sobremesas geladas e opções para festas. Para a criança APLV não ficar de fora de nenhum momento especial.",
+      "Ebook com 25 receitas doces para APLV, alérgicos a ovo e glúten — brigadeiro, pudim, bolos de chocolate, sobremesas geladas e opções para festas. Para a criança não ficar de fora de nenhum momento especial.",
     cover: "/materiais/capa-doces.jpg",
     alt: "Capa do ebook 25 Receitas Doces para APLV",
-    downloadUrl:
-      "https://drive.google.com/file/d/1Kz3rwbJbOCUhcY8v5xM-Ktc5l1ArhcM6/view?usp=sharing",
+    // Checkout Eduzz. O pareamento livro↔link veio da dona do site (msg 1788226217).
+    checkoutUrl: "https://sun.eduzz.com/1752601",
     bullets: [
       "25 receitas doces passo a passo, todas sem leite",
       "Opções para festas, aniversários e sobremesas do dia",
-      "Adaptações para ovo e glúten quando aplicável",
+      "Para APLV, alérgicos a ovo e glúten",
     ],
   },
 ];
@@ -50,9 +50,10 @@ export default function MateriaisPage() {
   return (
     <>
       <Section
-        eyebrow="Materiais gratuitos"
+        titleAs="h1"
+        eyebrow="Materiais"
         title="Ebooks de receitas sem leite"
-        description="Desenvolvidos pela Juliana para famílias APLV. Download direto, sem cadastro."
+        description="Desenvolvidos pela Dra. Juliana para APLV, alérgicos a ovo e glúten."
       />
 
       <section className="container pb-20">
@@ -94,16 +95,16 @@ export default function MateriaisPage() {
               <div className="mt-auto flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg">
                   <a
-                    href={m.downloadUrl}
+                    href={m.checkoutUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Download className="h-4 w-4" />
-                    Baixar ebook
+                    <ShoppingCart className="h-4 w-4" />
+                    Comprar ebook
                   </a>
                 </Button>
                 <p className="text-xs text-foreground/60 self-center">
-                  Abre no Google Drive em nova aba
+                  Checkout da Eduzz, em nova aba
                 </p>
               </div>
             </article>
@@ -131,9 +132,8 @@ export default function MateriaisPage() {
                 ajuste as receitas conforme orientação.
               </li>
               <li>
-                Este material é educativo e distribuído gratuitamente. É
-                permitido compartilhar o link com outras famílias; a cópia
-                integral do PDF para republicação não é autorizada.
+                Este material é educativo e de uso pessoal de quem compra. A
+                cópia, o repasse e a republicação do PDF não são autorizados.
               </li>
             </ul>
           </div>

@@ -1,274 +1,403 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BookOpen,
-  CalendarCheck2,
-  GraduationCap,
-  HeartHandshake,
-  Sparkles,
-  Stethoscope,
-} from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 
-import { BlogCard } from "@/components/blog-card";
 import { Button } from "@/components/ui/button";
-import { HeroVisual } from "@/components/hero-visual";
-import { Section } from "@/components/section";
+import { VerificadorRotulo } from "@/components/verificador-rotulo";
 import { getAllPosts } from "@/lib/blog";
 import { siteConfig, whatsappLink } from "@/lib/site";
+
+const PACOTES = [
+  {
+    nome: "Pacote completo",
+    destaque: true,
+    itens: [
+      { t: "1 consulta + 2 retornos, um a cada 20 dias, por vídeo", ok: true },
+      { t: "2 meses tirando dúvidas pelo WhatsApp em dias úteis", ok: true },
+      { t: "Prescrição de suplementação para mãe e criança, quando necessário", ok: true },
+      { t: "Orientação minuciosa da dieta de substituição", ok: true },
+      { t: "Lista de marcas seguras atualizada", ok: true },
+    ],
+  },
+  {
+    nome: "Pacote básico",
+    destaque: false,
+    itens: [
+      { t: "1 consulta + 1 retorno em até 20 dias", ok: true },
+      { t: "Acompanhamento via WhatsApp por 20 dias", ok: true },
+      { t: "Prescrição de suplementação para mãe e criança, quando necessário", ok: true },
+      { t: "Orientação minuciosa da dieta de substituição", ok: true },
+      { t: "Lista de marcas seguras atualizada", ok: true },
+    ],
+  },
+];
+
+const MATERIAIS = [
+  {
+    titulo: "25 receitas doces",
+    capa: "/materiais/capa-doces.jpg",
+    texto:
+      "Sobremesas e doces para APLV, alérgicos a ovo e glúten — para o seu filho e para você, que também está em dieta de exclusão.",
+  },
+  {
+    titulo: "25 receitas de lanches",
+    capa: "/materiais/capa-lanches.jpg",
+    texto:
+      "Tortas, salgados e pizzas para APLV, alérgicos a ovo e glúten, fáceis de fazer em qualquer hora do dia.",
+  },
+];
 
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 3);
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-soft/40 via-background to-background" />
-        <div className="container relative py-16 md:py-24 lg:py-28">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm mb-6">
-                <Sparkles className="h-3.5 w-3.5 text-secondary" />
-                Nutricionista clínica · {siteConfig.professional.crn}
-              </div>
+      {/* ---------------------------------------------------------- hero */}
+      <section className="secao pb-0 md:pb-0">
+        <div className="shell grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
+          <div>
+            <p className="olho">
+              Nutricionista clínica · {siteConfig.professional.crn}
+            </p>
 
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-balance text-primary">
-                {siteConfig.tagline}
-              </h1>
+            <h1 className="mt-6 text-[clamp(2.6rem,6vw,4.2rem)]">
+              O leite tem <span className="marcador">muitos nomes</span>. Você
+              vai aprender todos.
+            </h1>
 
-              <p className="mt-6 text-xl text-foreground/80 text-pretty max-w-2xl">
-                Referência em alergia à proteína do leite de vaca (APLV)
-                infantil. Acompanho famílias a estabilizar (parar) sintomas
-                com saúde, boa nutrição e leveza na maternidade.
-              </p>
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground text-pretty">
+              Sou a Dra. Juliana Maia. Descobri a APLV do meu filho aos 12 dias de
+              vida e saí do consultório com uma folha cheia de nomes e nenhuma
+              ideia do que fazer. Hoje ajudo mães e cuidadores a estabilizar os
+              sintomas com um caminho claro — de mãe de alérgico para mãe de
+              alérgico.
+            </p>
 
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg">
-                  <a
-                    href={whatsappLink()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Agendar consulta
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/aplv">O que é APLV</Link>
-                </Button>
-              </div>
-
-              <div className="mt-10 flex flex-wrap gap-8 text-sm text-foreground/70">
-                <div>
-                  <div className="font-serif text-3xl text-primary">20</div>
-                  <div>anos em nutrição clínica</div>
-                </div>
-                <div>
-                  <div className="font-serif text-3xl text-primary">10</div>
-                  <div>anos especialista em alergia alimentar</div>
-                </div>
-                <div>
-                  <div className="font-serif text-3xl text-primary">+7.000</div>
-                  <div>famílias orientadas</div>
-                </div>
-              </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button asChild size="lg">
+                <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+                  Agendar consulta
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <a href="#rotulo">Ler um rótulo comigo</a>
+              </Button>
             </div>
 
-            <div className="flex justify-center lg:justify-end">
-              <HeroVisual src={process.env.NEXT_PUBLIC_HERO_IMAGE} />
+            <p className="mt-10 flex items-baseline gap-3 border-t border-border pt-6">
+              <b className="font-serif text-3xl text-secondary-strong">+8.000</b>
+              <span className="text-muted-foreground">
+                famílias atendidas no Brasil e no exterior, com os sintomas
+                estabilizados.
+              </span>
+            </p>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+            <div className="arco overflow-hidden bg-surface-pessego">
+              <Image
+                src="/juliana-hero.jpg"
+                alt="Dra. Juliana Maia, nutricionista expert em APLV"
+                width={851}
+                height={1280}
+                priority
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* O QUE FAZEMOS AQUI */}
-      <Section
-        eyebrow="Como podemos te ajudar"
-        title="Um lugar para quem vive a APLV"
-        description="Conteúdo clínico, acolhimento informado e acompanhamento individualizado, com base em diretrizes oficiais brasileiras (ASBAI/SBP)."
-      >
-        <div className="grid gap-6 md:grid-cols-3">
-          <PillarCard
-            icon={<BookOpen className="h-6 w-6" />}
-            title="Conteúdo clínico sério"
-            description="Artigos e perguntas frequentes com base em diretrizes reconhecidas. Sem promessa de cura, sem receita milagrosa."
-            href="/blog"
-            linkLabel="Ler o blog"
-          />
-          <PillarCard
-            icon={<Stethoscope className="h-6 w-6" />}
-            title="Consultas 100% online"
-            description="Atendimento por videochamada (Google Meet) em pacotes estruturados, com suporte pós-consulta e lista de marcas seguras."
-            href="/consultas"
-            linkLabel="Ver as consultas"
-          />
-          <PillarCard
-            icon={<HeartHandshake className="h-6 w-6" />}
-            title="Experiência que virou método"
-            description="Juliana é mãe do João Artur, diagnosticado com APLV aos 12 dias. Essa vivência orienta a forma de conduzir cada família."
-            href="/sobre"
-            linkLabel="Conhecer a Juliana"
-          />
-        </div>
-      </Section>
+      {/* ------------------------------------------- a folha / verificador */}
+      <section id="rotulo" className="secao faixa-pessego mt-16 scroll-mt-20 md:mt-24">
+        <div className="shell grid items-start gap-12 lg:grid-cols-[.85fr_1.15fr]">
+          <div>
+            <p className="olho">A folha da gaveta</p>
 
-      {/* DIFERENCIAIS / ABORDAGEM */}
-      <Section
-        eyebrow="Abordagem"
-        title="Clínica, nutricional, acolhedora"
-        description="APLV não é frescura, nem sentença. Com plano certo, criança estabiliza e, na maioria dos casos, supera. O papel do acompanhamento é guiar esse caminho com segurança."
-        className="bg-muted/30"
-      >
-        <div className="grid gap-8 md:grid-cols-2">
-          <ApproachItem
-            title="Baseada em diretrizes"
-            description="Consenso Brasileiro (ASBAI/SBP), PCDT APLV (CONITEC), literatura atualizada. Cada orientação tem origem verificável."
-          />
-          <ApproachItem
-            title="Individualizada"
-            description="O plano leva em conta idade, tipo de APLV (IgE, não-IgE, mista), alergias associadas, contexto familiar e rotina real."
-          />
-          <ApproachItem
-            title="Educativa"
-            description="O objetivo é autonomia da família para ler rótulo, planejar refeição, enfrentar creche, festa, viagem — sem pânico."
-          />
-          <ApproachItem
-            title="Integrada"
-            description="Trabalha junto ao pediatra e ao alergista. Nutrição não substitui médico; ela ocupa o papel nutricional com profundidade."
-          />
-        </div>
-      </Section>
-
-      {/* BLOG EM DESTAQUE */}
-      <Section
-        eyebrow="Do blog"
-        title="Leitura curta, impacto real"
-        description="Artigos escritos para mães e pais em jornada APLV. Sem enrolação, sem tecniquês vazio."
-      >
-        <div className="grid gap-6 md:grid-cols-3">
-          {posts.map((p) => (
-            <BlogCard key={p.slug} post={p} />
-          ))}
-        </div>
-        <div className="mt-10 flex justify-center">
-          <Button asChild variant="outline">
-            <Link href="/blog">
-              Ver todos os artigos <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* FAQ TEASER */}
-      <Section
-        eyebrow="Perguntas frequentes"
-        title="25+ dúvidas, respondidas com base em evidência"
-        description="Diagnóstico, alimentação, fórmulas, escada do leite, creche, viagem. Um ponto de partida para quando o pediatra não teve tempo de explicar tudo."
-        className="bg-muted/30"
-      >
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {[
-            "Diagnóstico",
-            "Alimentação da criança",
-            "Mãe que amamenta",
-            "Fórmulas infantis",
-            "Reintrodução e prognóstico",
-            "Vida prática",
-          ].map((cat) => (
-            <div
-              key={cat}
-              className="rounded-xl bg-card border border-border p-5 flex items-center gap-3"
-            >
-              <GraduationCap className="h-5 w-5 text-secondary" />
-              <span className="font-medium">{cat}</span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 flex justify-center">
-          <Button asChild>
-            <Link href="/perguntas-frequentes">
-              Ir para as perguntas frequentes <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* CTA FINAL */}
-      <Section>
-        <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-contrast p-10 md:p-16">
-          <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-white to-transparent" />
-          <div className="relative max-w-2xl">
-            <CalendarCheck2 className="h-10 w-10 mb-5 opacity-90" />
-            <h2 className="font-serif text-4xl md:text-5xl text-balance mb-4">
-              Pronta para montar um plano para o seu filho?
-            </h2>
-            <p className="text-lg opacity-90 max-w-xl mb-8">
-              Consultas 100% online em pacotes estruturados, com suporte
-              pós-consulta e lista de marcas seguras. Agende pelo WhatsApp.
+            <blockquote className="mt-6 border-l-4 border-primary pl-6 font-serif text-[1.75rem] leading-tight text-terra">
+              “Abriu uma gaveta e me entregou uma folha com vários nomes. Falou
+              que eu tinha que ler todos os rótulos.”
+            </blockquote>
+            <p className="mt-3 text-sm text-subtle">
+              Dra. Juliana, sobre a consulta em que descobriu a APLV do João Artur.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button asChild variant="secondary" size="lg">
-                <a
-                  href={whatsappLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Agendar pelo WhatsApp
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
-                <Link href="/consultas">Ver detalhes das consultas</Link>
-              </Button>
+
+            <p className="mt-6 text-muted-foreground">
+              Foi assim que começou. Uma folha, um supermercado inteiro pela
+              frente e a sensação de que qualquer descuido machucava o meu
+              filho. Refiz essa folha do jeito que eu queria ter recebido: com o
+              que é leite, o que só parece, e o porquê de cada um.
+            </p>
+
+            <div className="mt-6 rounded-xl bg-white/70 p-5 text-[0.95rem] leading-relaxed text-muted-foreground">
+              <strong className="text-foreground">A regra de ouro:</strong> todo
+              rótulo brasileiro é obrigado a trazer, logo abaixo dos
+              ingredientes, a frase{" "}
+              <strong className="text-foreground">
+                “ALÉRGICOS: CONTÉM DERIVADOS DE LEITE”
+              </strong>
+              . Comece por ela. A lista de nomes serve para quando a dúvida
+              continuar — e para os nomes que confundem até quem já lê rótulo há
+              anos.
             </div>
           </div>
+
+          <VerificadorRotulo />
         </div>
-      </Section>
+      </section>
+
+      {/* ------------------------------------------------------- história */}
+      <section className="secao">
+        <div className="shell grid items-center gap-12 lg:grid-cols-[.8fr_1.2fr]">
+          <div className="relative mx-auto w-full max-w-xs lg:max-w-none">
+            {/* Bloco coral deslocado atrás — o retrato é retangular, então a
+                moldura precisa aparecer por fora e não por baixo da foto. */}
+            <div
+              aria-hidden
+              className="absolute -bottom-3 -right-3 h-full w-full rounded-xl bg-primary"
+            />
+            <div className="relative overflow-hidden rounded-xl">
+              <Image
+                src="/juliana-retrato.jpg"
+                alt="Dra. Juliana Maia"
+                width={931}
+                height={1280}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div>
+            <p className="olho">17 de maio de 2016</p>
+            <h2 className="mt-5 text-[clamp(2rem,4vw,2.75rem)]">
+              Eu estava do outro lado dessa tela
+            </h2>
+
+            <div className="mt-6 space-y-4 text-muted-foreground">
+              <p>
+                Exausta, de pijama, quase duas semanas sem dormir. Troquei a
+                fralda do João Artur e ela estava cheia de sangue.
+              </p>
+              <p>
+                A pediatra confirmou a APLV e mandou tirar leite e derivados da
+                minha alimentação. Eu era nutricionista e mesmo assim saí dali
+                sem saber por onde começar. Os sintomas melhoravam, voltavam, e
+                a culpa vinha junto.
+              </p>
+              <p>
+                Foram anos estudando alergia alimentar para conseguir cuidar do
+                meu filho — e depois para cuidar das famílias que chegavam com a
+                mesma cara de susto que eu tive. Hoje ele está curado. É por isso
+                que eu sei exatamente onde você está.
+              </p>
+            </div>
+
+            <p className="mt-6 font-serif text-2xl italic text-terra">
+              Dra. Juliana Maia
+            </p>
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-subtle">
+              Nutricionista clínica · {siteConfig.professional.crn}
+            </p>
+
+            <Button asChild variant="outline" className="mt-6">
+              <Link href="/sobre">Ler a história inteira</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------ consultas */}
+      <section className="secao faixa-creme">
+        <div className="shell">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="olho olho-centro">Atendimento</p>
+            <h2 className="mt-5 text-[clamp(2rem,4vw,2.75rem)]">
+              Consulta individual, online, de qualquer lugar
+            </h2>
+            <p className="mt-5 text-muted-foreground">
+              Análise e orientação da dieta, prescrição de suplementos quando
+              necessário, avaliação da fórmula infantil e a lista de marcas
+              seguras atualizada.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+            {PACOTES.map((p) => (
+              <div
+                key={p.nome}
+                className={`relative rounded-xl border bg-white p-7 ${
+                  p.destaque
+                    ? "border-secondary/40 shadow-card"
+                    : "border-border"
+                }`}
+              >
+                {p.destaque ? (
+                  <span className="absolute -top-3 left-7 rounded-full bg-secondary px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-white">
+                    Mais escolhido
+                  </span>
+                ) : null}
+
+                <h3 className="text-2xl">{p.nome}</h3>
+
+                <ul className="mt-5 space-y-3">
+                  {p.itens.map((i) => (
+                    <li key={i.t} className="flex gap-3 text-[0.95rem]">
+                      <span
+                        aria-hidden
+                        className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full ${
+                          i.ok
+                            ? "bg-secondary-soft text-secondary-strong"
+                            : "bg-primary-soft text-primary-strong"
+                        }`}
+                      >
+                        {i.ok ? (
+                          <Check className="h-3 w-3" strokeWidth={3} />
+                        ) : (
+                          <X className="h-3 w-3" strokeWidth={3} />
+                        )}
+                      </span>
+                      <span
+                        className={
+                          i.ok ? "text-muted-foreground" : "text-subtle"
+                        }
+                      >
+                        {i.t}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  asChild
+                  variant={p.destaque ? "primary" : "outline"}
+                  className="mt-7"
+                >
+                  <a
+                    href={whatsappLink(
+                      siteConfig.contact.whatsapp,
+                      `Olá! Quero saber os valores do ${p.nome}.`,
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ver valores no WhatsApp
+                  </a>
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            Emito nota fiscal para reembolso no plano de saúde e no Imposto de
+            Renda.{" "}
+            <Link href="/consultas" className="text-secondary-strong underline">
+              Ver tudo o que está incluído
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------ materiais */}
+      <section className="secao">
+        <div className="shell">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="olho olho-centro">Para o dia a dia</p>
+            <h2 className="mt-5 text-[clamp(2rem,4vw,2.75rem)]">
+              Materiais que resolvem a semana
+            </h2>
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+            {MATERIAIS.map((m) => (
+              <article
+                key={m.titulo}
+                className="overflow-hidden rounded-xl border border-border bg-white"
+              >
+                <div className="grid place-items-center bg-surface-pessego-2 p-8">
+                  <Image
+                    src={m.capa}
+                    alt={m.titulo}
+                    width={420}
+                    height={300}
+                    className="h-44 w-auto object-contain drop-shadow-md"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl">{m.titulo}</h3>
+                  <p className="mt-3 text-[0.95rem] text-muted-foreground">
+                    {m.texto}
+                  </p>
+                  <Button asChild variant="outline" className="mt-5">
+                    <Link href="/materiais">Conhecer</Link>
+                  </Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------- sobre APLV */}
+      <section className="secao faixa-creme">
+        <div className="shell">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="olho olho-centro">Sobre APLV</p>
+            <h2 className="mt-5 text-[clamp(2rem,4vw,2.75rem)]">
+              Entenda o que está acontecendo
+            </h2>
+            <p className="mt-5 text-muted-foreground">
+              Leituras para quem acabou de ouvir o diagnóstico — ou ainda
+              desconfia dele.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {posts.map((post) => (
+              <article key={post.slug}>
+                <h3 className="text-xl leading-snug">
+                  <Link href={`/blog/${post.slug}`} className="hover:underline">
+                    {post.title}
+                  </Link>
+                </h3>
+                <p className="mt-3 text-[0.95rem] text-muted-foreground">
+                  {post.description}
+                </p>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-secondary-strong"
+                >
+                  Ler o artigo <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button asChild variant="outline">
+              <Link href="/blog">Ver todos os artigos</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------- faixa final */}
+      <section className="secao faixa-verde">
+        <div className="shell mx-auto max-w-2xl text-center">
+          <h2 className="text-[clamp(2rem,4.5vw,3rem)]">
+            Vamos começar pelo começo?
+          </h2>
+          <p className="mt-5 text-white/85">
+            Na primeira consulta a gente organiza a dieta, revisa a fórmula,
+            define a suplementação e você sai com um plano — não com uma folha
+            de nomes.
+          </p>
+          <Button asChild variant="light" size="lg" className="mt-8">
+            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+              Agendar pelo WhatsApp
+            </a>
+          </Button>
+        </div>
+      </section>
     </>
-  );
-}
-
-function PillarCard({
-  icon,
-  title,
-  description,
-  href,
-  linkLabel,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  href: string;
-  linkLabel: string;
-}) {
-  return (
-    <div className="rounded-2xl bg-card border border-border p-7 flex flex-col hover:shadow-card hover:border-primary/40 transition-all">
-      <div className="h-12 w-12 rounded-xl bg-primary-soft text-primary flex items-center justify-center mb-5">
-        {icon}
-      </div>
-      <h3 className="font-serif text-2xl text-foreground mb-2">{title}</h3>
-      <p className="text-foreground/75 flex-1">{description}</p>
-      <Link
-        href={href}
-        className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-      >
-        {linkLabel}
-        <ArrowRight className="h-4 w-4" />
-      </Link>
-    </div>
-  );
-}
-
-function ApproachItem({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="border-l-2 border-secondary/50 pl-6">
-      <h3 className="font-serif text-2xl text-primary mb-2">{title}</h3>
-      <p className="text-foreground/75">{description}</p>
-    </div>
   );
 }

@@ -7,7 +7,10 @@ out
 .DS_Store
 *.log
 .vercel
+.wrangler
+.dev.vars
 next-env.d.ts
 
 # Configuração local do Claude Code
 .claude/
+*.tsbuildinfo

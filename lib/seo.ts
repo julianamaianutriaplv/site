@@ -26,9 +26,16 @@ export function buildMetadata(options: SeoOptions = {}): Metadata {
     noIndex,
   } = options;
 
+  // O Google corta o título por volta de 60 caracteres. Vários artigos já
+  // chegam nesse limite sozinhos, e grudar o nome do site atrás só garante
+  // que a marca — a parte descartável — seja o que some. O sufixo tem 17
+  // caracteres com o "Dra."; acima de 41 o título vai puro.
+  const SUFIXO = "Dra. Juliana Maia";
   const fullTitle = title
-    ? `${title} | ${siteConfig.shortName}`
-    : `${siteConfig.shortName} — Nutricionista especialista em APLV`;
+    ? title.length > 41 || title.includes(SUFIXO)
+      ? title
+      : `${title} | ${SUFIXO}`
+    : `${siteConfig.shortName} — Nutricionista expert em APLV`;
 
   const url = absoluteUrl(path);
   const imageUrl = image.startsWith("http") ? image : absoluteUrl(image);
@@ -43,6 +50,15 @@ export function buildMetadata(options: SeoOptions = {}): Metadata {
     alternates: {
       canonical: url,
     },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+        { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    },
+    manifest: "/site.webmanifest",
     openGraph: {
       type,
       locale: "pt_BR",
@@ -87,7 +103,10 @@ export function medicalBusinessJsonLd() {
     name: siteConfig.shortName,
     description: siteConfig.description,
     url: siteConfig.url,
+    logo: absoluteUrl("/icon-512.png"),
+    image: absoluteUrl(siteConfig.ogImage),
     telephone: `+${siteConfig.contact.whatsapp}`,
+    email: siteConfig.contact.email,
     medicalSpecialty: "Nutrition",
     founder: {
       "@type": "Person",
@@ -164,7 +183,9 @@ export function articleJsonLd(input: {
       name: siteConfig.shortName,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/logo.png"),
+        url: absoluteUrl("/icon-512.png"),
+        width: 512,
+        height: 512,
       },
     },
     mainEntityOfPage: {

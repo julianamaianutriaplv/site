@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { MdxContent } from "@/components/mdx-content";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { articleJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
@@ -23,7 +23,7 @@ export function generateMetadata({ params }: Props) {
   if (!post) return {};
 
   return buildMetadata({
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     path: `/blog/${post.slug}`,
     type: "article",
@@ -39,7 +39,7 @@ export default function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const jsonLd = articleJsonLd({
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     slug: post.slug,
     datePublished: post.publishedAt,
@@ -121,22 +121,8 @@ export default function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      <Script
-        id={`ld-article-${post.slug}`}
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
-      <Script
-        id={`ld-breadcrumb-${post.slug}`}
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumb),
-        }}
-      />
+      <JsonLd id={`ld-article-${post.slug}`} data={jsonLd} />
+      <JsonLd id={`ld-breadcrumb-${post.slug}`} data={breadcrumb} />
     </>
   );
 }

@@ -31,7 +31,7 @@ export function Nav() {
           href="/"
           className="flex items-center gap-2"
           onClick={() => setOpen(false)}
-          aria-label="Juliana Maia Nutri APLV — página inicial"
+          aria-label="Dra. Juliana Maia Nutri APLV — página inicial"
         >
           <BrandMark />
         </Link>

@@ -193,16 +193,16 @@ O schema.org FAQPage é gerado automaticamente a partir desses dados.
 
 ## Como publicar
 
-**Guia completo passo a passo em `DEPLOY.md`** — cobre GitHub → Vercel → DNS Squarespace → preservação de Google Workspace MX → Search Console → GA4.
+**Guia completo passo a passo em `DEPLOY.md`** — cobre build estático → Cloudflare Workers → virada do DNS na Cloudflare → preservação dos MX da Hostinger → `.com` redirecionando para o `.com.br` → Search Console → GA4.
 
 Resumo:
 1. Publica o repositório no GitHub
-2. Importa na Vercel, configura env vars
-3. Adiciona domínio `julianamaianutriaplv.com` em Settings → Domains
-4. Configura A record e CNAME www no Squarespace DNS (preservando MX do Workspace)
+2. `npm run deploy` — build estático + `wrangler deploy` (cai em `*.workers.dev`)
+3. Valida na URL `workers.dev` com o WordPress ainda no ar
+4. Anexa `julianamaianutriaplv.com.br` como Custom Domain do Worker (é aqui que o WordPress sai do ar; os MX da Hostinger não são tocados)
 5. Submete sitemap no Search Console
 
-**Domínio de produção:** `julianamaianutriaplv.com` (apex). O site atual da Juliana em `.com.br` continua independente — não há canibalização de SEO entre os dois.
+**Domínio de produção:** `julianamaianutriaplv.com.br` (apex) — este site **substitui** o WordPress que estava na Hostinger. O `.com` (hoje em `clientHold` na Squarespace) passa a redirecionar 301 para o `.com.br`. As URLs antigas do WordPress com equivalente estão mapeadas em `public/_redirects`; as páginas de funil descontinuadas caem em 404 de propósito.
 
 ---
 

@@ -1,0 +1,51 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "julianamaianutriaplv",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-31",
+
+  // Build estático do Next (`npm run build` gera `out/`).
+  // Assets casam primeiro e são servidos pela edge sem invocar o Worker;
+  // só o que não casa (—/api/lead e 404) cai no worker/index.ts.
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    // `/contato/` (URL antiga do WordPress) → 308 → `/contato`
+    "html_handling": "drop-trailing-slash",
+    // Não entrega a 404 aqui: deixa passar pro Worker, que trata /api/lead
+    "not_found_handling": "none"
+  },
+
+  // Desligado depois da virada. A URL *.workers.dev servia o site inteiro
+  // com robots "Allow: /" e sem X-Robots-Tag, ou seja: era conteúdo duplicado
+  // indexável. A canonical apontava para o .com.br e mitigava, mas o certo é
+  // a cópia não existir. Para validar antes de publicar, use `npm run preview`.
+  "workers_dev": false,
+
+  // Produção. Deliberadamente ROTAS, não custom_domain.
+  //
+  // custom_domain exige apagar os registros A do apex e do www (a API recusa
+  // com o código 100117 enquanto existirem) e abre uma janela de site fora do
+  // ar entre a exclusão e a criação. A rota intercepta na borda com o DNS
+  // intacto: nenhum registro é alterado, então MX, SPF e CAA ficam a salvo
+  // por construção, e a virada não tem downtime.
+  //
+  // Depende do apex estar proxiado (nuvem laranja) — está.
+  // ROLLBACK: remover este bloco e reimplantar. O tráfego volta na hora para
+  // a origem Hostinger (89.117.6.105), sem esperar propagação de DNS.
+  // Snapshot do DNS anterior: _private/dns-snapshot-pre-virada.txt
+  "routes": [
+    {
+      "pattern": "julianamaianutriaplv.com.br/*",
+      "zone_name": "julianamaianutriaplv.com.br"
+    },
+    {
+      "pattern": "www.julianamaianutriaplv.com.br/*",
+      "zone_name": "julianamaianutriaplv.com.br"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}

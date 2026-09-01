@@ -15,7 +15,7 @@ interface ProfilePhotoProps {
 
 export function ProfilePhoto({
   src = "/juliana-retrato.jpg",
-  alt = "Juliana Maia — nutricionista clínica especialista em APLV",
+  alt = "Dra. Juliana Maia — nutricionista clínica expert em APLV",
   shape = "portrait",
   className,
 }: ProfilePhotoProps) {

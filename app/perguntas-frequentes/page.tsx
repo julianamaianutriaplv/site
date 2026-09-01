@@ -1,4 +1,3 @@
-import Script from "next/script";
 import Link from "next/link";
 
 import {
@@ -8,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { Section } from "@/components/section";
 import { faqCategories, faqItems, type FaqCategory } from "@/content/faq";
 import { buildMetadata, faqPageJsonLd } from "@/lib/seo";
@@ -44,6 +44,7 @@ export default function FaqPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Perguntas frequentes"
         title="Dúvidas comuns sobre APLV, respondidas com clareza"
         description="As respostas aqui são educativas, baseadas em diretrizes oficiais (ASBAI/SBP, Consenso Brasileiro, PCDT CONITEC). Não substituem consulta individualizada."
@@ -118,12 +119,7 @@ export default function FaqPage() {
         </div>
       </section>
 
-      <Script
-        id="ld-faq"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd id="ld-faq" data={jsonLd} />
     </>
   );
 }

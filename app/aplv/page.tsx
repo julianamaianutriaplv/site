@@ -24,6 +24,7 @@ export default function AplvPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Página educacional"
         title="O que é APLV"
         description="Um guia objetivo sobre alergia à proteína do leite de vaca: o que acontece no corpo da criança, os tipos, sintomas, como é diagnosticada e os principais mitos."

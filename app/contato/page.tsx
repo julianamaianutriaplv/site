@@ -15,7 +15,7 @@ import { siteConfig, whatsappLink } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Contato",
   description:
-    "Fale com Juliana Maia e equipe pelo WhatsApp, Instagram ou e-mail. Agendamento de consultas e dúvidas.",
+    "Fale com a Dra. Juliana Maia e equipe pelo WhatsApp, Instagram ou e-mail. Agendamento de consultas e dúvidas.",
   path: "/contato",
 });
 
@@ -23,9 +23,10 @@ export default function ContatoPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Contato"
         title="Vamos conversar"
-        description="A forma mais rápida de falar com a Juliana e a equipe é pelo WhatsApp. Também estamos nas redes sociais."
+        description="A forma mais rápida de falar com a Dra. Juliana e a equipe é pelo WhatsApp. Também estamos nas redes sociais."
       />
 
       <section className="container pb-20">

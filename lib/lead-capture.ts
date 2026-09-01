@@ -1,7 +1,10 @@
 /**
  * Sistema plugável de captura de e-mails.
  *
- * Troca de provedor sem mexer no código do formulário — basta ajustar LEAD_PROVIDER no .env.
+ * Troca de provedor sem mexer no código do formulário — basta ajustar LEAD_PROVIDER.
+ *
+ * Runtime: Cloudflare Workers. As variáveis não vêm de `process.env` — chegam
+ * pelo objeto `env` do Worker e são injetadas explicitamente (ver worker/index.ts).
  *
  * Providers suportados:
  * - console   → loga no servidor (desenvolvimento / teste antes de decidir)
@@ -10,6 +13,22 @@
  * - resend    → Resend (para envio transacional direto do PDF)
  * - none      → captura desligada
  */
+
+/**
+ * Variáveis de ambiente consumidas pela captura.
+ * No Worker vêm de `env`; em scripts Node, de `process.env`.
+ */
+export interface LeadEnv {
+  LEAD_PROVIDER?: string;
+  BREVO_API_KEY?: string;
+  BREVO_LIST_ID?: string;
+  MAILCHIMP_API_KEY?: string;
+  MAILCHIMP_LIST_ID?: string;
+  MAILCHIMP_DC?: string;
+  RESEND_API_KEY?: string;
+  RESEND_FROM?: string;
+  NEXT_PUBLIC_SITE_URL?: string;
+}
 
 export type LeadProvider =
   | "none"
@@ -40,14 +59,17 @@ export interface LeadResult {
   downloadUrl?: string;
 }
 
-function getProvider(): LeadProvider {
-  return (process.env.LEAD_PROVIDER as LeadProvider) || "none";
+function getProvider(env: LeadEnv): LeadProvider {
+  return (env.LEAD_PROVIDER as LeadProvider) || "none";
 }
 
 /**
  * API pública. Chama o provider correto conforme env.
  */
-export async function captureLead(input: LeadInput): Promise<LeadResult> {
+export async function captureLead(
+  input: LeadInput,
+  env: LeadEnv,
+): Promise<LeadResult> {
   if (!input.consent) {
     return {
       ok: false,
@@ -58,7 +80,7 @@ export async function captureLead(input: LeadInput): Promise<LeadResult> {
     return { ok: false, message: "E-mail inválido." };
   }
 
-  const provider = getProvider();
+  const provider = getProvider(env);
 
   switch (provider) {
     case "none":
@@ -70,11 +92,11 @@ export async function captureLead(input: LeadInput): Promise<LeadResult> {
     case "console":
       return captureConsole(input);
     case "brevo":
-      return captureBrevo(input);
+      return captureBrevo(input, env);
     case "mailchimp":
-      return captureMailchimp(input);
+      return captureMailchimp(input, env);
     case "resend":
-      return captureResend(input);
+      return captureResend(input, env);
     default:
       return { ok: false, message: "Provider inválido." };
   }
@@ -89,7 +111,8 @@ function isValidEmail(email: string): boolean {
  * Só loga no servidor. Útil para QA antes de ligar integração real.
  */
 async function captureConsole(input: LeadInput): Promise<LeadResult> {
-  // Em produção, usar um logger estruturado (pino/winston) — este é um stub.
+  // Aparece em `wrangler tail` / Workers Logs. Stub para QA antes de ligar
+  // a integração real.
   console.log("[lead:console]", {
     ...input,
     // nunca logar senha ou dado sensível real
@@ -104,9 +127,12 @@ async function captureConsole(input: LeadInput): Promise<LeadResult> {
  * Provider 2 — Brevo (antigo SendinBlue).
  * Doc: https://developers.brevo.com/reference/createcontact
  */
-async function captureBrevo(input: LeadInput): Promise<LeadResult> {
-  const apiKey = process.env.BREVO_API_KEY;
-  const listId = process.env.BREVO_LIST_ID;
+async function captureBrevo(
+  input: LeadInput,
+  env: LeadEnv,
+): Promise<LeadResult> {
+  const apiKey = env.BREVO_API_KEY;
+  const listId = env.BREVO_LIST_ID;
 
   if (!apiKey) {
     return {
@@ -168,10 +194,13 @@ async function captureBrevo(input: LeadInput): Promise<LeadResult> {
  * Provider 3 — Mailchimp.
  * Doc: https://mailchimp.com/developer/marketing/api/list-members/add-member-to-list/
  */
-async function captureMailchimp(input: LeadInput): Promise<LeadResult> {
-  const apiKey = process.env.MAILCHIMP_API_KEY;
-  const listId = process.env.MAILCHIMP_LIST_ID;
-  const dc = process.env.MAILCHIMP_DC; // data center, ex: "us21"
+async function captureMailchimp(
+  input: LeadInput,
+  env: LeadEnv,
+): Promise<LeadResult> {
+  const apiKey = env.MAILCHIMP_API_KEY;
+  const listId = env.MAILCHIMP_LIST_ID;
+  const dc = env.MAILCHIMP_DC; // data center, ex: "us21"
 
   if (!apiKey || !listId || !dc) {
     return {
@@ -190,7 +219,7 @@ async function captureMailchimp(input: LeadInput): Promise<LeadResult> {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          authorization: `Basic ${Buffer.from(`anystring:${apiKey}`).toString("base64")}`,
+          authorization: `Basic ${btoa(`anystring:${apiKey}`)}`,
         },
         body: JSON.stringify({
           email_address: input.email,
@@ -236,9 +265,12 @@ async function captureMailchimp(input: LeadInput): Promise<LeadResult> {
  * Não mantém lista centralizada — precisa combinar com outro sistema se
  * quiser CRM. Bom para operação leve.
  */
-async function captureResend(input: LeadInput): Promise<LeadResult> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM;
+async function captureResend(
+  input: LeadInput,
+  env: LeadEnv,
+): Promise<LeadResult> {
+  const apiKey = env.RESEND_API_KEY;
+  const from = env.RESEND_FROM;
 
   if (!apiKey || !from) {
     return {
@@ -252,7 +284,7 @@ async function captureResend(input: LeadInput): Promise<LeadResult> {
   const html = `
     <p>Olá, ${escapeHtml(input.name)}!</p>
     <p>Obrigada pelo cadastro. Aqui está o material que você pediu:</p>
-    <p><a href="${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/materiais/${encodeURIComponent(input.source)}.pdf">
+    <p><a href="${env.NEXT_PUBLIC_SITE_URL ?? ""}/materiais/${encodeURIComponent(input.source)}.pdf">
       Clique aqui para baixar
     </a></p>
     <p>Juliana Maia Nutri APLV</p>

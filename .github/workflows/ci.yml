@@ -32,12 +32,12 @@ jobs:
       - name: TypeScript check
         run: npm run typecheck
 
-      - name: Build (Next.js)
+      - name: Build (Next.js — static export)
         run: npm run build
         env:
-          # Durante o CI, usamos valores dummy só para o build compilar.
-          # Produção lê de vars configuradas no painel da Vercel.
-          NEXT_PUBLIC_SITE_URL: "https://julianamaianutriaplv.com"
+          # Valores só para o build compilar no CI. Em produção as
+          # NEXT_PUBLIC_* entram no ambiente do build de deploy (ver DEPLOY.md).
+          NEXT_PUBLIC_SITE_URL: "https://julianamaianutriaplv.com.br"
           NEXT_PUBLIC_WHATSAPP_NUMBER: "5531999191083"
           NEXT_PUBLIC_WHATSAPP_SUPPORT: "5531999191083"
           LEAD_PROVIDER: "none"

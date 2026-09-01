@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Termos de uso",
   description:
-    "Termos de uso do site Juliana Maia Nutri APLV — conteúdo educativo, limites de responsabilidade e disclaimer médico.",
+    "Termos de uso do site da Dra. Juliana Maia Nutri APLV — conteúdo educativo, limites de responsabilidade e disclaimer médico.",
   path: "/termos",
 });
 
@@ -13,6 +13,7 @@ export default function TermosPage() {
   return (
     <>
       <Section
+        titleAs="h1"
         eyebrow="Termos"
         title="Termos de uso"
         description="Regras para o uso deste site e dos conteúdos publicados."
@@ -27,7 +28,7 @@ export default function TermosPage() {
           <h2>1. Natureza do conteúdo</h2>
           <p>
             Todo o conteúdo deste site — artigos, perguntas frequentes, guias,
-            materiais gratuitos, posts em redes sociais vinculadas e qualquer
+            materiais, posts em redes sociais vinculadas e qualquer
             outra informação publicada — tem caráter{" "}
             <strong>educativo e informativo</strong>.
           </p>
@@ -42,7 +43,7 @@ export default function TermosPage() {
           <p>
             Ao aplicar qualquer orientação extraída deste site sem
             acompanhamento profissional, você assume a responsabilidade
-            integral pelas decisões. A Juliana Maia Nutri APLV não se
+            integral pelas decisões. A Dra. Juliana Maia Nutri APLV não se
             responsabiliza por desfechos decorrentes do uso do conteúdo fora
             do contexto de consulta.
           </p>
@@ -68,7 +69,7 @@ export default function TermosPage() {
             {siteConfig.professional.fullName} ou devidamente citado. É
             permitido compartilhar trechos curtos com atribuição e link para a
             fonte original. É vedada a reprodução integral de artigos,
-            materiais gratuitos ou qualquer conteúdo deste site sem
+            materiais ou qualquer conteúdo deste site sem
             autorização por escrito.
           </p>
 

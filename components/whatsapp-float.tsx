@@ -7,7 +7,7 @@ export function WhatsAppFloat() {
     <a
       href={whatsappLink(
         siteConfig.contact.whatsappSupport,
-        "Olá! Gostaria de falar com a equipe da Juliana sobre consultas e valores.",
+        "Olá! Gostaria de falar com a equipe da Dra. Juliana sobre consultas e valores.",
       )}
       target="_blank"
       rel="noopener noreferrer"
