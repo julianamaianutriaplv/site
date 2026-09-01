@@ -12,7 +12,10 @@ export const siteConfig = {
 
   // Domínio público — fallback para build sem env; em prod vem de NEXT_PUBLIC_SITE_URL
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://julianamaianutriaplv.com.br",
-  ogImage: "/og-default.png",
+  // Nome novo de propósito: Facebook e WhatsApp guardam o card por URL, e
+  // trocar o arquivo no mesmo caminho deixaria o card antigo (sem "Dra.",
+  // com a foto velha) circulando por semanas.
+  ogImage: "/og-dra-juliana.png",
 
   // Credenciais públicas (extraídas do site atual da Juliana)
   professional: {

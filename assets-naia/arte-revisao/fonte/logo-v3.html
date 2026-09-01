@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=block" rel="stylesheet">
+<style>
+  /* V3 — o wordmark original ("Juliana" e "Maia") entra como está, em alta
+     fidelidade. Só o "Dra." é composto, em Nunito 800, com a altura de
+     maiúscula casada com a do "J" original (117px de topo à linha de base). */
+  html, body { background: transparent; margin: 0; }
+  .palco { padding: 60px; display: inline-block; }
+  .lockup { display: flex; align-items: center; gap: 54px; }
+  .icone { height: 380px; display: block; }
+  .texto { display: flex; flex-direction: column; align-items: center; }
+
+  .linha1 { display: flex; align-items: baseline; gap: 26px; }
+  .dra {
+    font-family: Nunito, sans-serif;
+    font-weight: 800;
+    font-size: 166px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #E46A65;
+    /* o "J" desce abaixo da linha de base; o alinhamento por baseline usa o
+       rodapé da imagem, então o texto sobe os 10px dessa descida */
+    position: relative;
+    top: -10px;
+  }
+  .juliana { width: 552px; display: block; }
+  .maia { width: 365px; display: block; margin-top: 10px; }
+  .assinatura { width: 292px; margin-top: 24px; display: block; }
+</style>
+<div class="palco">
+  <div class="lockup">
+    <img class="icone" src="logo-icone.png">
+    <div class="texto">
+      <div class="linha1">
+        <span class="dra">Dra.</span>
+        <img class="juliana" src="logo-juliana.png">
+      </div>
+      <img class="maia" src="logo-maia.png">
+      <img class="assinatura" src="logo-nutriaplv.png">
+    </div>
+  </div>
+</div>

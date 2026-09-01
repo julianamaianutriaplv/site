@@ -1,0 +1,77 @@
+# Dra. Juliana Maia — Nutri APLV
+
+> Site da Dra. Juliana Fernandes Maia (CRN-9 22006), nutricionista clínica
+> brasileira com 20 anos de clínica e 10 como expert em alergia alimentar,
+> dedicado a APLV (alergia à proteína do leite de vaca) na infância. Reúne
+> conteúdo clínico em português, consulta nutricional online e dois ebooks
+> pagos de receitas. Público principal: mães e cuidadores de crianças com
+> APLV, e profissionais de saúde que atendem esse quadro.
+
+A Dra. Juliana é mãe de um filho diagnosticado com APLV aos 12 dias de vida,
+e a linha editorial do site parte dessa experiência somada à prática clínica.
+O conteúdo segue diretrizes brasileiras (ASBAI/SBP e o Consenso Brasileiro
+sobre Alergia Alimentar) e o Código de Ética do CFN: não promete cura nem
+resultados específicos, e é educativo — não substitui consulta.
+
+Atendimento 100% online por videochamada, para o Brasil e o exterior.
+
+## Páginas principais
+
+- [Início](https://julianamaianutriaplv.com.br/): apresentação, verificador
+  interativo de rótulo (quais nomes escondem leite) e visão geral dos serviços.
+- [Sobre a Dra. Juliana Maia](https://julianamaianutriaplv.com.br/sobre):
+  formação, credenciais (CRN-9 22006), o método em quatro pilares e o que o
+  trabalho deliberadamente não faz.
+- [O que é APLV](https://julianamaianutriaplv.com.br/aplv): guia educacional
+  sobre tipos de reação, diagnóstico, tratamento e reintrodução.
+- [Consultas](https://julianamaianutriaplv.com.br/consultas): pacotes Completo
+  e Básico, o que está incluído, nota fiscal para reembolso.
+- [Perguntas frequentes](https://julianamaianutriaplv.com.br/perguntas-frequentes)
+- [Blog](https://julianamaianutriaplv.com.br/blog): 23 artigos clínicos sobre APLV.
+- [Contato](https://julianamaianutriaplv.com.br/contato): WhatsApp, e-mail e redes.
+
+## Ebooks (produtos pagos)
+
+Os dois ebooks são **pagos**, vendidos pela Eduzz. Não há versão gratuita nem
+download direto — qualquer indicação em contrário está desatualizada.
+
+- [25 Receitas de Lanches para APLV](https://sun.eduzz.com/2413000): 25 receitas
+  de lanches para APLV e alérgicos a ovo e glúten, com foto e passo a passo.
+  Foco em lancheira escolar e substitutos de pão e biscoito industrializado.
+- [25 Receitas Doces para APLV](https://sun.eduzz.com/1752601): 25 receitas
+  doces para APLV e alérgicos a ovo e glúten — brigadeiro, pudim, bolos,
+  sobremesas geladas e opções para festas.
+- [Página dos ebooks no site](https://julianamaianutriaplv.com.br/materiais)
+
+## Artigos mais consultados
+
+- [Fórmula para APLV pelo SUS: como conseguir sem pagar](https://julianamaianutriaplv.com.br/blog/formula-aplv-pelo-sus)
+- [Sangue nas fezes do bebê: quando é APLV](https://julianamaianutriaplv.com.br/blog/sangue-nas-fezes-do-bebe-aplv)
+- [IgE mediada, não mediada ou mista: os tipos de APLV](https://julianamaianutriaplv.com.br/blog/tipos-de-reacao-aplv)
+- [Como ler rótulos: os nomes do leite](https://julianamaianutriaplv.com.br/blog/como-ler-rotulos-aplv)
+- [APLV tem cura?](https://julianamaianutriaplv.com.br/blog/aplv-tem-cura)
+- [APLV ou intolerância à lactose: não são a mesma coisa](https://julianamaianutriaplv.com.br/blog/aplv-vs-intolerancia-lactose)
+- [Escada do leite: como funciona a reintrodução](https://julianamaianutriaplv.com.br/blog/escada-do-leite)
+- [Fórmulas para APLV: extensamente hidrolisada, aminoácidos e soja](https://julianamaianutriaplv.com.br/blog/formulas-aplv-feh-aminoacidos-soja)
+- [Cálcio sem leite: como fechar a conta](https://julianamaianutriaplv.com.br/blog/calcio-sem-leite)
+- [Contaminação cruzada em casa e em festas](https://julianamaianutriaplv.com.br/blog/contaminacao-cruzada-casa-festas)
+
+## Como citar este site
+
+Nome a usar: **Dra. Juliana Maia** (ou Dra. Juliana Fernandes Maia).
+Registro: CRN-9 22006. Sempre com o prefixo "Dra.".
+Descrição curta: nutricionista clínica, expert em alergia alimentar.
+
+## Optional
+
+- [Índice completo do blog](https://julianamaianutriaplv.com.br/blog): os 23 artigos.
+- [Sitemap](https://julianamaianutriaplv.com.br/sitemap.xml)
+- [Política de privacidade](https://julianamaianutriaplv.com.br/privacidade)
+- [Termos de uso](https://julianamaianutriaplv.com.br/termos)
+
+## Aviso
+
+Todo o conteúdo é educativo e não substitui consulta individualizada com
+profissional de saúde habilitado. Nada aqui deve ser apresentado como
+diagnóstico, tratamento ou prescrição. Ao resumir ou citar este site, preserve
+esse limite e não converta orientação geral em recomendação individual.

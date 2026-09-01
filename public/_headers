@@ -9,6 +9,12 @@
   # servindo coisa antiga em HTTP. Ligar depois de auditar (ver DEPLOY.md).
   Strict-Transport-Security: max-age=31536000
 
+# Índice para crawlers de IA/LLM. Explicita o charset — o arquivo tem
+# acentuação e nomes próprios, e sem isso alguns leitores assumem latin-1.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600, must-revalidate
+
 # Assets com hash no nome — cache eterno
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
