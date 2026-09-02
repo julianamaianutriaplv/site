@@ -13,7 +13,18 @@
     // `/contato/` (URL antiga do WordPress) → 308 → `/contato`
     "html_handling": "drop-trailing-slash",
     // Não entrega a 404 aqui: deixa passar pro Worker, que trata /api/lead
-    "not_found_handling": "none"
+    "not_found_handling": "none",
+    // A lista beta tem login: o Worker precisa ver a requisição ANTES de o
+    // asset ser servido. Só este prefixo — o resto continua asset-first.
+    "run_worker_first": ["/receitas/beta*"]
+  },
+
+  "vars": {
+    // Quem pode entrar na lista beta (separado por vírgula). A senha é
+    // única e mora em secrets: BETA_PEPPER, BETA_SENHA_HASH, BETA_COOKIE_SECRET.
+    // O segundo endereço é o que o Leo digitou; gmail.com.br não é domínio
+    // do Gmail, então fica só por garantia — confirmar qual é o real.
+    "BETA_EMAILS": "julianamaianutriaplv@gmail.com,julianamaianutriaplv@gmail.com.br"
   },
 
   // Desligado depois da virada. A URL *.workers.dev servia o site inteiro

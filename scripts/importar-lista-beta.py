@@ -3,16 +3,17 @@
 Importa o app "Rótulo Seguro" (projeto irmão de produtos) para o site, como
 /receitas/beta — aplicando a pele do site por cima, sem tocar no template dela.
 
-    python3 scripts/importar-lista-beta.py            # receitas só com título/selo
-    python3 scripts/importar-lista-beta.py --receitas-completas
+    python3 scripts/importar-lista-beta.py               # receitas completas (atrás de login)
+    python3 scripts/importar-lista-beta.py --so-titulos  # só título/selo/idade
 
 Por que a pele é um invólucro e não uma edição do template: o template mora no
 repositório da Juliana, governado pelo CLAUDE.md dela; o site só precisa
 redefinir as variáveis CSS (:root) e as fontes. Zero acoplamento.
 
-Por que as receitas saem SEM ingredientes e preparo por padrão: elas são o
-conteúdo dos e-books vendidos a R$27,90 — e este repositório é PÚBLICO. O que
-entra aqui vai para o histórico do git para sempre.
+As receitas vão COMPLETAS — elas são o conteúdo dos e-books vendidos a R$27,90,
+então o arquivo gerado (public/receitas/beta.html) é gitignored e só sobe no
+deploy, e o Worker exige login em /receitas/beta* (worker/beta-auth.ts).
+Este repositório é PÚBLICO: o que entra nele vai para o histórico para sempre.
 """
 import json, re, sys
 from pathlib import Path
@@ -20,7 +21,7 @@ from pathlib import Path
 SITE = Path(__file__).resolve().parent.parent
 ORIGEM = SITE.parent / "JulianaMaiaNutriAPLV-produtos" / "saida" / "rotulo-seguro.html"
 DESTINO = SITE / "public" / "receitas" / "beta.html"
-COMPLETAS = "--receitas-completas" in sys.argv
+COMPLETAS = "--so-titulos" not in sys.argv
 
 EBOOK = {"doces": "25 Receitas Doces para APLV", "lanches": "25 Receitas de Lanches para APLV"}
 

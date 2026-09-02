@@ -8,8 +8,9 @@
  */
 
 import { captureLead, type LeadEnv } from "../lib/lead-capture";
+import { portaoBeta, type BetaEnv } from "./beta-auth";
 
-export interface Env extends LeadEnv {
+export interface Env extends LeadEnv, BetaEnv {
   ASSETS: Fetcher;
 }
 
@@ -107,6 +108,10 @@ async function handleLead(req: Request, env: Env): Promise<Response> {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
+
+    // /receitas/beta* chega aqui antes do asset (run_worker_first): login.
+    const beta = await portaoBeta(req, env);
+    if (beta) return beta;
 
     if (url.pathname === "/api/lead") {
       return handleLead(req, env);
