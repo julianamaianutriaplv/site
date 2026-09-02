@@ -69,10 +69,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/materiais"
+                  href="/receitas"
                   className="text-white/75 hover:text-sage"
                 >
-                  Materiais
+                  Receitas
                 </Link>
               </li>
             </ul>
