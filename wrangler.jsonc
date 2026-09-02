@@ -22,9 +22,8 @@
   "vars": {
     // Quem pode entrar na lista beta (separado por vírgula). A senha é
     // única e mora em secrets: BETA_PEPPER, BETA_SENHA_HASH, BETA_COOKIE_SECRET.
-    // O segundo endereço é o que o Leo digitou; gmail.com.br não é domínio
-    // do Gmail, então fica só por garantia — confirmar qual é o real.
-    "BETA_EMAILS": "julianamaianutriaplv@gmail.com,julianamaianutriaplv@gmail.com.br"
+    // Confirmado pelo Leo em 02/09/2026: só este endereço.
+    "BETA_EMAILS": "julianamaianutriaplv@gmail.com"
   },
 
   // Desligado depois da virada. A URL *.workers.dev servia o site inteiro
