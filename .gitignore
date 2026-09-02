@@ -14,3 +14,6 @@ next-env.d.ts
 # Configuração local do Claude Code
 .claude/
 *.tsbuildinfo
+
+# Material de trabalho local (copy em revisão, snapshots de DNS com IP de origem). Repo é PÚBLICO.
+_private/

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Info, ShoppingCart } from "lucide-react";
 
+import { AbasReceitas } from "@/components/abas-receitas";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/section";
 import { buildMetadata } from "@/lib/seo";
@@ -55,6 +56,8 @@ export default function ReceitasPage() {
         title="Ebooks de receitas sem leite"
         description="Desenvolvidos pela Dra. Juliana para APLV, alérgicos a ovo e glúten."
       />
+
+      <AbasReceitas ativa="/receitas" />
 
       <section className="container pb-20">
         <div className="grid gap-10 md:grid-cols-2 max-w-5xl">
