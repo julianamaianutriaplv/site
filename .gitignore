@@ -14,3 +14,10 @@ next-env.d.ts
 # Configuração local do Claude Code
 .claude/
 *.tsbuildinfo
+
+# Material de trabalho local (copy em revisão, snapshots de DNS com IP de origem). Repo é PÚBLICO.
+_private/
+
+# Lista beta com as 47 receitas completas dos e-books: gerada localmente
+# (scripts/importar-lista-beta.py) e enviada só no deploy. Repo é PÚBLICO.
+public/receitas/beta.html
