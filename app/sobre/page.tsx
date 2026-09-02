@@ -15,7 +15,7 @@ import { siteConfig, whatsappLink } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Sobre a Dra. Juliana Maia",
   description:
-    "Dra. Juliana Fernandes Maia: 20 anos como nutricionista clínica e há 10 expert em alergia alimentar. Mãe de alérgico, por acaso.",
+    "Sou a Dra. Juliana Maia, nutricionista há 20 anos. Descobri a APLV do meu filho aos 12 dias de vida — e foi assim que virei especialista.",
   path: "/sobre",
 });
 
@@ -24,7 +24,7 @@ export default function SobrePage() {
     <>
       <Section
         titleAs="h1"
-        eyebrow="Quem é"
+        eyebrow="Quem sou"
         title="Dra. Juliana Maia"
         description={siteConfig.tagline}
       >
@@ -37,26 +37,89 @@ export default function SobrePage() {
               />
             </div>
             <p>
-              A Dra. Juliana Fernandes Maia ({siteConfig.professional.crn}) tem
-              20 anos como nutricionista clínica e há 10 é expert em alergia
-              alimentar — com foco em APLV (alergia à proteína do leite de
-              vaca) na infância.
+              Olá! Sou a Juliana Maia, nutricionista clínica expert em alergia
+              alimentar ({siteConfig.professional.crn}). Eu quero te contar
+              sobre o meu maior e mais desafiador papel: ser mãe de um
+              menininho muito esperado e muito esperto, que no dia 17 de maio de
+              2016, aos 12 dias de nascido, me deu o maior susto da vida.
             </p>
             <p>
-              A escolha pela especialidade não veio só do consultório. Veio de
-              casa. O filho dela, João Artur, foi diagnosticado com APLV aos{" "}
-              <strong>12 dias de vida</strong>, com sangue nas fezes, choro
-              intenso e sono fragmentado. A busca pela compreensão do
-              tratamento na prática — não apenas da teoria — levou a Dra. Juliana a
-              aprofundar estudos, escutar outras famílias, testar caminhos e
-              consolidar um método que funciona na rotina real.
+              Eu estava ali exausta, há quase duas semanas praticamente sem
+              dormir, ainda de pijama, um tanto descabelada, amamentando o João
+              Artur — e foi quando ele fez uma força e disparou a chorar.
+              Terminamos a mamada, fui fazer a troca e, ao abrir a fraldinha
+              dele, tinha muito, mas muito sangue. Minha perna bambeou. Eu quase
+              caí e só tive forças para gritar pelo meu marido. Fiquei
+              desesperada, achando que ele estava morrendo.
             </p>
             <p>
-              Hoje, o trabalho dela combina clínica, educação e apoio
-              emocional. O objetivo é claro: estabilizar os sintomas da
-              criança com saúde, boa nutrição e leveza na maternidade — sem
-              promessa de milagre, com base em diretrizes oficiais brasileiras
-              (ASBAI/SBP e Consenso Brasileiro sobre Alergia Alimentar).
+              Liguei para a pediatra aos prantos. Ela, por coincidência do
+              destino, era também gastropediatra. Escutou a nossa história,
+              olhou as fotos das fraldas, olhou para mim e disse: “Você já sabe,
+              né?”. Acho que ela disse isso por eu ser nutricionista. Mas eu
+              juro que não sabia de nada — eu só queria que o meu filho não
+              morresse. Aí ela completou: “Ele tem APLV. Agora você tem que
+              tirar leite e derivados da sua alimentação.” Abriu uma gaveta, me
+              entregou uma folha com vários nomes e falou que eu tinha que ler
+              todos os rótulos. E foi isso. Fim da consulta.
+            </p>
+            <p>
+              Eu limpei as lágrimas e pensei: “Calma, Juliana, é só tirar o
+              leite e ele vai ficar bem.” Só que não. As semanas foram passando,
+              ele melhorava um pouco e voltava a piorar — e a culpa vinha com
+              tudo. “Que fracasso de mãe eu sou, que não consigo fazer o meu
+              filho ficar bem.” Ele chorava, eu chorava junto, e aquele começo
+              de maternidade que na minha cabeça era para ser tão lindo estava
+              um caos.
+            </p>
+            <p>
+              Eu procurei diversos especialistas — foram mais de oito. E ouvi
+              deles que eu já tinha tirado o leite, que tem bebê que fica com
+              sintoma mesmo, que com o tempo ia passar. Enquanto isso, o que
+              vinha era remédio e mais remédio para aliviar o que a alergia
+              causava nele. O atendente da farmácia já me conhecia pelo nome. E
+              o João seguia em reação: dor, chiado, infecção respiratória, muco
+              e sangue nas fezes. Eu restringia ainda mais a minha dieta, e nem
+              sei quantas vezes fiquei com fome por medo de comer alguma coisa
+              que fizesse o meu filho piorar.
+            </p>
+            <p>
+              Como se não bastasse, ainda vinham os olhares e os comentários de
+              parentes me chamando de louca, de exagerada, dizendo que não
+              existia isso de alergia a leite. E a pressão para eu parar de
+              amamentar e entrar logo com a fórmula — recebi essa recomendação
+              até de profissionais de saúde, que sequer tentaram investigar o
+              que eu estava fazendo de errado.
+            </p>
+            <p>
+              Mas desistir não era uma opção. Se nenhuma orientação que eu
+              recebi foi suficiente, eu mesma tive que correr atrás. Nas
+              madrugadas, mesmo exausta, eu estudava — e quando ele acordava,
+              eu amamentava com um braço e com o outro continuava ali, no
+              computador, nos livros, nas anotações. Mesmo com mais de dez anos
+              de formada, eu demorei. Levei meses estudando até entender o que
+              precisava fazer para estabilizar o meu filho.
+            </p>
+            <p>
+              E aconteceu. A nossa vida virou da água para o vinho. O João
+              parou de reagir, parou de ter dor, e quando tinha acabado de
+              completar um ano e dois meses já não reagia mais ao leite. Hoje
+              ele come de tudo.
+            </p>
+            <p>
+              Contei o nosso caminho em grupos de mães de que eu participava, e
+              elas começaram a me procurar. Comecei a orientar o mesmo passo a
+              passo, claro e simples, e vi que funcionava para os filhos delas
+              também — não importava o sintoma, a idade da criança ou se a mãe
+              amamentava. Uma foi indicando para a outra, e não demorou para o
+              meu telefone ser bombardeado de pedidos de consulta, de mães do
+              Brasil inteiro e até do exterior. Eu era concursada, trabalhava o
+              dia inteiro. Saí do meu emprego para me dedicar a isso.
+            </p>
+            <p>
+              Essa é a minha missão: acabar com os sintomas que a alergia
+              alimentar causa nas crianças, com um caminho claro para a mãe
+              seguir. Eu sei exatamente onde você está — porque eu estive aí.
             </p>
           </div>
 

@@ -10,7 +10,7 @@ export const metadata = buildMetadata({
   title: "Ebooks de receitas para APLV",
   description:
     "Ebooks de receitas para APLV, alérgicos a ovo e glúten: 25 receitas de lanches + 25 receitas doces. Compra pela Eduzz.",
-  path: "/materiais",
+  path: "/receitas",
 });
 
 const materials = [
@@ -46,12 +46,12 @@ const materials = [
   },
 ];
 
-export default function MateriaisPage() {
+export default function ReceitasPage() {
   return (
     <>
       <Section
         titleAs="h1"
-        eyebrow="Materiais"
+        eyebrow="Receitas"
         title="Ebooks de receitas sem leite"
         description="Desenvolvidos pela Dra. Juliana para APLV, alérgicos a ovo e glúten."
       />

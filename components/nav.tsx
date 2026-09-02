@@ -15,7 +15,7 @@ const navItems = [
   { href: "/consultas", label: "Consultas" },
   { href: "/perguntas-frequentes", label: "Perguntas" },
   { href: "/blog", label: "Blog" },
-  { href: "/materiais", label: "Materiais" },
+  { href: "/receitas", label: "Receitas" },
   { href: "/contato", label: "Contato" },
 ];
 // Nota: /depoimentos removido em conformidade com CFN Res. 599/2018

@@ -187,7 +187,7 @@ export default function HomePage() {
               <p>
                 Foram anos estudando alergia alimentar para conseguir cuidar do
                 meu filho — e depois para cuidar das famílias que chegavam com a
-                mesma cara de susto que eu tive. Hoje ele está curado. É por isso
+                mesma cara de susto que eu tive. Hoje ele come de tudo. É por isso
                 que eu sei exatamente onde você está.
               </p>
             </div>
@@ -303,7 +303,7 @@ export default function HomePage() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="olho olho-centro">Para o dia a dia</p>
             <h2 className="mt-5 text-[clamp(2rem,4vw,2.75rem)]">
-              Materiais que resolvem a semana
+              Receitas que resolvem a semana
             </h2>
           </div>
 
@@ -328,7 +328,7 @@ export default function HomePage() {
                     {m.texto}
                   </p>
                   <Button asChild variant="outline" className="mt-5">
-                    <Link href="/materiais">Conhecer</Link>
+                    <Link href="/receitas">Conhecer</Link>
                   </Button>
                 </div>
               </article>
